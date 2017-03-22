@@ -20,8 +20,8 @@ const app = express();
 app.use(compression({threshold: 0}));
 app.use(express.static('public'));
 
-app.get( '/', ( req, res ) => {
-  res.redirect( '/top/1' );
+app.get('/', (req, res) => {
+  res.redirect(`/${hn.stories[0]}/1`);
 });
 
 hn.stories.forEach(story => {
