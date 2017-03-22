@@ -2,7 +2,7 @@
 viperHTML version of the Hacker News app.
 
 TODO **backend**
-  - [*] show list of items
+  - [x] show list of items
   - [ ] show comments
   - [ ] show users
   - [ ] polish
