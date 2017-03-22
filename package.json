@@ -1,0 +1,31 @@
+{
+  "name": "viper-news",
+  "version": "0.0.0",
+  "description": "viperHTML 🐍 Hacker News",
+  "main": "index.js",
+  "scripts": {
+    "babel": "mkdir -p es2015; babel ./js --out-dir ./es2015 --presets=es2015",
+    "build": "npm run generate-views; npm run generate-css; npm run babel; npm run bundle",
+    "bundle": "mkdir -p public/dist; browserify ./es2015/app.js | uglifyjs -mc warnings=false > public/dist/bundle.js",
+    "generate-css": "bash generate-css",
+    "generate-views": "bash generate-views",
+    "start": "node server"
+  },
+  "author": "Andrea Giammarchi",
+  "license": "MIT",
+  "devDependencies": {
+    "babel-cli": "^6.23.0",
+    "babel-preset-es2015": "^6.22.0",
+    "browserify": "^14.1.0",
+    "csso": "^2.3.2",
+    "uglify-js": "^2.8.12"
+  },
+  "dependencies": {
+    "broadcast": "^2.0.2",
+    "compression": "^1.6.2",
+    "express": "^4.15.2",
+    "firebase": "^3.7.1",
+    "lru-cache": "^4.0.2",
+    "viperhtml": "^0.5.1"
+  }
+}

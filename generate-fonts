@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+
+dir=$(pwd)
+
+mkdir -p ${dir}/public/fonts/{roboto,rajdhani}
+base='https://svelte-hn.now.sh/fonts'
+
+cd ${dir}/public/fonts/roboto
+for f in italic regular bold bolditalic; do
+  curl -LO "$base/roboto/roboto-$f.woff2"
+  curl -LO "$base/roboto/roboto-$f.woff"
+done
+
+cd ${dir}/public/fonts/rajdhani
+for f in light semibold; do
+  curl -LO "$base/rajdhani/rajdhani-$f.woff2"
+  curl -LO "$base/rajdhani/rajdhani-$f.woff"
+done

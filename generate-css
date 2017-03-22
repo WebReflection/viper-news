@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+mkdir -p public/dist
+
+echo '' > public/dist/bundle.css
+
+for f in $(ls css/*.css); do
+  ./node_modules/.bin/csso $f >> public/dist/bundle.css
+done

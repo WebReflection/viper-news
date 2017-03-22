@@ -1,0 +1,84 @@
+nav {
+  background-color: #214537;
+  color: white;
+  font-family: Rajdhani;
+  font-weight: 300;
+  padding: 1em;
+}
+.icon {
+  display: inline-block;
+  width: 0.8em;
+  height: 0.8em;
+  border: 1px solid white;
+  float: left;
+  text-align: center;
+  line-height: 1;
+  font-size: 2em;
+  position: relative;
+  top: -0.1em;
+  box-sizing: border-box;
+  margin: 0 0.5em 0 0;
+  opacity: 0.6;
+  cursor: default;
+  z-index: 999;
+}
+
+.icon span:after {
+  content: 'viperHTML';
+  position: fixed;
+  top: 3.3em;
+  left: 1em;
+  font-weight: 600;
+  color: #214537;
+  opacity: 0;
+  transition: all .3s ease-in;
+}
+
+.icon:hover span:after {
+  opacity: 1;
+}
+
+.icon span {
+  position: relative;
+  top: -0.48em;
+  font-weight: 400;
+  font-size: .5em;
+}
+ul {
+  margin: 0;
+  padding: 0;
+}
+li {
+  display: inline-block;
+  padding: 0 0.2em;
+}
+.about {
+  float: right;
+}
+@media (min-width: 400px) {
+  .icon {
+    margin: 0 1em 0 0;
+  }
+  li {
+    display: inline-block;
+    padding: 0 0.5em;
+  }
+}
+.selected {
+  position: relative;
+  font-weight: 600;
+  display: inline-block;
+}
+.selected::after {
+  position: absolute;
+  content: '';
+  width: 100%;
+  height: 2px;
+  background-color: white;
+  display: block;
+  bottom: -1em;
+}
+nav a {
+  color: white;
+  text-decoration: none;
+}
