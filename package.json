@@ -29,5 +29,13 @@
     "browserify": "^14.1.0",
     "csso-cli": "^1.0.0",
     "uglify-js": "^2.8.21"
+  },
+  "now": {
+    "alias": "viper-news.now.sh",
+    "files": [
+      "public",
+      "server",
+      "shared"
+    ]
   }
 }
