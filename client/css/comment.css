@@ -1,0 +1,45 @@
+.comment {
+  border-top: 1px solid #eee;
+  padding: 1em 0 0 0;
+}
+
+.comment .children {
+  padding: 0 0 0 1em;
+}
+
+@media (min-width: 720px) {
+  .comment .children {
+    padding: 0 0 0 2em;
+  }
+}
+
+.comment li {
+  list-style: none;
+}
+
+.comment p {
+  line-height: 1.4;
+  font-size: 14px;
+  margin: 0 0 1em 0;
+  color: inherit;
+}
+
+.comment pre {
+  white-space: pre-wrap;
+}
+
+.comment .meta {
+  display: block;
+  font-size: 14px;
+  color: #888;
+  margin: 0 0 1em 0;
+}
+
+.comment a {
+  color: #888;
+}
+
+/* prevent crazy overflow layout bug on mobile */
+.body * {
+  overflow-wrap: break-word;
+}

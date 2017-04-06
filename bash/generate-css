@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+CSS_BASE="$(dirname $0)/.."
+CSS_SOURCE="$CSS_BASE/client/css"
+CSS_DEST="$CSS_BASE/public/css"
+CSS_O="$CSS_BASE/node_modules/.bin/csso"
+
+mkdir -p "$CSS_DEST"
+
+echo '' > "$CSS_DEST/bundle.css"
+
+for f in $(ls "$CSS_SOURCE"/*.css); do
+  "$CSS_O" "$f" >> "$CSS_DEST/bundle.css"
+done

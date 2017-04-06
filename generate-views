@@ -1,9 +1,0 @@
-#!/usr/bin/env bash
-
-mkdir -p js/view
-
-for f in $(ls template); do
-  echo 'module.exports = (render, model) => render`' > "js/view/${f:0:-4}js"
-  cat template/$f >> "js/view/${f:0:-4}js"
-  echo '`;' >> "js/view/${f:0:-4}js"
-done

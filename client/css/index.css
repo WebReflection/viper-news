@@ -1,0 +1,42 @@
+body {
+  margin: 0;
+  font-family: sans-serif;
+  background-color: #f4f4f4;
+  overflow-y: scroll;
+}
+
+.hidden {
+  display: none;
+}
+
+.opaque {
+  opacity: .1;
+  pointer-events: none;
+}
+
+main {
+  position: relative;
+  max-width: 56em;
+  background-color: white;
+  padding: 2em;
+  margin: 0 auto;
+  box-sizing: border-box;
+  transition: opacity .3s ease-in;
+}
+
+main h1, h2, h3, h4, h5, h6 {
+  margin: 0 0 0.5em 0;
+  font-weight: 400;
+}
+
+main h1 {
+  font-size: 1.6em;
+}
+
+main p {
+  font-size: 14px;
+}
+
+main a {
+  color: inherit;
+}

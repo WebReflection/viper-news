@@ -3,14 +3,14 @@ viperHTML version of the Hacker News app.
 
 TODO **backend**
   - [x] show list of items
-  - [ ] show comments
-  - [ ] show users
+  - [x] show comments
+  - [x] show users
   - [ ] polish
 
 
 TODO **frontend**
-  - [ ] update list of items
-  - [ ] change list
-  - [ ] show comments
-  - [ ] show users
+  - [x] update list of items
+  - [x] change list
+  - [x] show comments
+  - [x] show users
   - [ ] polish

@@ -1,0 +1,20 @@
+.item {
+  border-bottom: 1em solid #f4f4f4;
+  margin: 0 -2em 2em -2em;
+  padding: 0 2em 2em 2em;
+}
+.item .main-link {
+  display: block;
+  text-decoration: none;
+}
+.item small {
+  display: block;
+  font-size: 14px;
+}
+.item .meta {
+  font-size: 0.8em;
+  color: #666;
+}
+.item + h3 {
+  margin: 0 0 1em 0;
+}

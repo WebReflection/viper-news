@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+VIEW_SOURCE="$(dirname $0)/../shared/template"
+VIEW_DEST="$(dirname $0)/../shared/view"
+
+mkdir -p $VIEW_DEST
+
+for f in $(ls "$VIEW_SOURCE"); do
+  if [ "${f: -5}" = ".html" ]; then
+    echo 'module.exports = (render, model) => render`' > "$VIEW_DEST/${f:0:-4}js"
+    cat "$VIEW_SOURCE/$f" >> "$VIEW_DEST/${f:0:-4}js"
+    echo '`;' >> "$VIEW_DEST/${f:0:-4}js"
+  fi
+done
