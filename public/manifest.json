@@ -6,6 +6,7 @@
  "orientation": "portrait-primary",
  "background_color": "#fff",
  "description": "viperHTML 🐍 Hacker News",
+ "theme_color": "#ffffff",
  "icons": [
   {
    "src": "\/android-icon-36x36.png",
