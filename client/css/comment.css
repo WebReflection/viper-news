@@ -41,5 +41,6 @@
 
 /* prevent crazy overflow layout bug on mobile */
 .body * {
+  word-wrap: break-word;
   overflow-wrap: break-word;
 }

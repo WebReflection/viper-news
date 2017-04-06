@@ -98,3 +98,9 @@ const mapComment = comment => {
 require('onpushstate');
 addEventListener('pushstate', showPage);
 addEventListener('popstate', showPage);
+
+
+// make it available offline
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('/sw.js');
+}

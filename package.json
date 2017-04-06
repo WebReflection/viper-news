@@ -5,12 +5,13 @@
   "main": "./server/js/index.js",
   "scripts": {
     "babel": "babel ./client/js --out-dir ./public/js --presets=es2015",
-    "build": "npm run generate-views && npm run generate-css && npm run bundle && npm run babel && npm run minify",
+    "build": "npm run generate-views && npm run generate-css && npm run bundle && npm run babel && npm run minify && npm run sw",
     "bundle": "browserify ./client/js/index.js -o ./client/js/bundle.max.js",
     "minify": "uglifyjs -mc warnings=false ./public/js/bundle.max.js -o ./public/js/bundle.js && rm ./client/js/bundle.max.js",
     "generate-css": "bash ./bash/generate-css",
     "generate-views": "bash ./bash/generate-views",
-    "start": "node ./server/js/index.js"
+    "start": "node ./server/js/index.js",
+    "sw": " uglifyjs -mc warnings=false ./public/js/sw.js -o ./public/sw.js"
   },
   "author": "Andrea Giammarchi",
   "license": "ISC",
@@ -33,6 +34,8 @@
   "now": {
     "alias": "viper-news.now.sh",
     "files": [
+      "bash",
+      "client",
       "public",
       "server",
       "shared"
