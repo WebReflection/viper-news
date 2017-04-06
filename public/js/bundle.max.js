@@ -1010,7 +1010,7 @@ function _taggedTemplateLiteral(strings, raw) { return Object.freeze(Object.defi
     };
   }, {}], 12: [function (require, module, exports) {
     module.exports = function (render, model) {
-      return render(_templateObject6, model.url ? model.url : "/item/" + model.id, model.title, model.hostname ? "(" + model.hostname.replace(/^www\./, '') + ")" : '', model.score, "/user/" + model.by, model.by, model.timeBetween + " ago | <a href='/item/" + model.id + "'>" + model.descendants + " comments</a>", model.index);
+      return render(_templateObject6, model.url ? model.url : "/item/" + model.id, model.title, model.hostname ? "(" + model.hostname.replace(/^www\./, '') + ")" : '', model.score, "/user/" + model.by, model.by, model.timeBetween + " ago | <a href='/item/" + model.id + "'>" + (model.descendants || 0) + " comments</a>", model.index);
     };
   }, {}], 13: [function (require, module, exports) {
     module.exports = function (render, model) {

@@ -6,7 +6,7 @@ module.exports = (render, model) => render`
     <meta name='viewport' content='width=device-width'>
     <title> ${model.title} </title>
     <link rel="stylesheet" href="/css/bundle.css">
-    <script async src='/js/bundle.max.js'></script>
+    <script async src='/js/bundle.js'></script>
   </head>
   <body>
     <header>${model.header}</header>

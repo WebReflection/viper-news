@@ -9,7 +9,7 @@ module.exports = (render, model) => render`
   </h2>
   <p>
     ${model.score} points by <a href='${`/user/${model.by}`}'> ${model.by} </a>${
-      `${model.timeBetween} ago | <a href='/item/${model.id}'>${model.descendants} comments</a>`
+      `${model.timeBetween} ago | <a href='/item/${model.id}'>${model.descendants || 0} comments</a>`
   }</p>
   <span class='index'>
     ${model.index}
