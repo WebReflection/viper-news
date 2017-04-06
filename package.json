@@ -10,7 +10,7 @@
     "minify": "uglifyjs -mc warnings=false ./public/js/bundle.max.js -o ./public/js/bundle.js && rm ./client/js/bundle.max.js",
     "generate-css": "bash ./bash/generate-css",
     "generate-views": "bash ./bash/generate-views",
-    "start": "node server"
+    "start": "node ./server/js/index.js"
   },
   "author": "Andrea Giammarchi",
   "license": "ISC",
