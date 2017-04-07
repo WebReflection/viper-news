@@ -5,10 +5,10 @@ VIEW_DEST="$(dirname $0)/../shared/view"
 
 mkdir -p $VIEW_DEST
 
-for f in $(ls "$VIEW_SOURCE"); do
-  if [ "${f: -5}" = ".html" ]; then
-    echo 'module.exports = (render, model) => render`' > "$VIEW_DEST/${f:0:-4}js"
-    cat "$VIEW_SOURCE/$f" >> "$VIEW_DEST/${f:0:-4}js"
-    echo '`;' >> "$VIEW_DEST/${f:0:-4}js"
-  fi
+for f in $(ls "$VIEW_SOURCE"/*.html); do
+  f="$(basename $f)"
+  f="$VIEW_DEST/${f:0:$((${#f}-5))}"
+  echo 'module.exports = (render, model) => render`' > "$f.js"
+  cat "$VIEW_SOURCE/$(basename $f).html" >> "$f.js"
+  echo '`;' >> "$f.js"
 done

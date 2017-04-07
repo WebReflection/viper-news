@@ -1,6 +1,6 @@
 'use strict';
 
-var _templateObject = _taggedTemplateLiteral(['\n      <link rel="apple-touch-icon" sizes="57x57" href="/img/apple-icon-57x57.png">\n      <link rel="apple-touch-icon" sizes="60x60" href="/img/apple-icon-60x60.png">\n      <link rel="apple-touch-icon" sizes="72x72" href="/img/apple-icon-72x72.png">\n      <link rel="apple-touch-icon" sizes="76x76" href="/img/apple-icon-76x76.png">\n      <link rel="apple-touch-icon" sizes="114x114" href="/img/apple-icon-114x114.png">\n      <link rel="apple-touch-icon" sizes="120x120" href="/img/apple-icon-120x120.png">\n      <link rel="apple-touch-icon" sizes="144x144" href="/img/apple-icon-144x144.png">\n      <link rel="apple-touch-icon" sizes="152x152" href="/img/apple-icon-152x152.png">\n      <link rel="apple-touch-icon" sizes="180x180" href="/img/apple-icon-180x180.png">\n      <link rel="icon" type="image/png" sizes="192x192"  href="/img/android-icon-192x192.png">\n      <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32x32.png">\n      <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16x16.png">\n    '], ['\n      <link rel="apple-touch-icon" sizes="57x57" href="/img/apple-icon-57x57.png">\n      <link rel="apple-touch-icon" sizes="60x60" href="/img/apple-icon-60x60.png">\n      <link rel="apple-touch-icon" sizes="72x72" href="/img/apple-icon-72x72.png">\n      <link rel="apple-touch-icon" sizes="76x76" href="/img/apple-icon-76x76.png">\n      <link rel="apple-touch-icon" sizes="114x114" href="/img/apple-icon-114x114.png">\n      <link rel="apple-touch-icon" sizes="120x120" href="/img/apple-icon-120x120.png">\n      <link rel="apple-touch-icon" sizes="144x144" href="/img/apple-icon-144x144.png">\n      <link rel="apple-touch-icon" sizes="152x152" href="/img/apple-icon-152x152.png">\n      <link rel="apple-touch-icon" sizes="180x180" href="/img/apple-icon-180x180.png">\n      <link rel="icon" type="image/png" sizes="192x192"  href="/img/android-icon-192x192.png">\n      <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32x32.png">\n      <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16x16.png">\n    ']);
+var _templateObject = _taggedTemplateLiteral(['\n    <link rel="apple-touch-icon" sizes="57x57" href="/img/apple-icon-57x57.png">\n    <link rel="apple-touch-icon" sizes="60x60" href="/img/apple-icon-60x60.png">\n    <link rel="apple-touch-icon" sizes="72x72" href="/img/apple-icon-72x72.png">\n    <link rel="apple-touch-icon" sizes="76x76" href="/img/apple-icon-76x76.png">\n    <link rel="apple-touch-icon" sizes="114x114" href="/img/apple-icon-114x114.png">\n    <link rel="apple-touch-icon" sizes="120x120" href="/img/apple-icon-120x120.png">\n    <link rel="apple-touch-icon" sizes="144x144" href="/img/apple-icon-144x144.png">\n    <link rel="apple-touch-icon" sizes="152x152" href="/img/apple-icon-152x152.png">\n    <link rel="apple-touch-icon" sizes="180x180" href="/img/apple-icon-180x180.png">\n    <link rel="icon" type="image/png" sizes="192x192"  href="/img/android-icon-192x192.png">\n    <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32x32.png">\n    <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16x16.png">\n  '], ['\n    <link rel="apple-touch-icon" sizes="57x57" href="/img/apple-icon-57x57.png">\n    <link rel="apple-touch-icon" sizes="60x60" href="/img/apple-icon-60x60.png">\n    <link rel="apple-touch-icon" sizes="72x72" href="/img/apple-icon-72x72.png">\n    <link rel="apple-touch-icon" sizes="76x76" href="/img/apple-icon-76x76.png">\n    <link rel="apple-touch-icon" sizes="114x114" href="/img/apple-icon-114x114.png">\n    <link rel="apple-touch-icon" sizes="120x120" href="/img/apple-icon-120x120.png">\n    <link rel="apple-touch-icon" sizes="144x144" href="/img/apple-icon-144x144.png">\n    <link rel="apple-touch-icon" sizes="152x152" href="/img/apple-icon-152x152.png">\n    <link rel="apple-touch-icon" sizes="180x180" href="/img/apple-icon-180x180.png">\n    <link rel="icon" type="image/png" sizes="192x192"  href="/img/android-icon-192x192.png">\n    <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32x32.png">\n    <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16x16.png">\n  ']);
 
 function _taggedTemplateLiteral(strings, raw) { return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
@@ -99,12 +99,16 @@ require('onpushstate');
 addEventListener('pushstate', showPage);
 addEventListener('popstate', showPage);
 
+// add PWA related stuff
+addEventListener('load', function () {
+  var fragment = document.createDocumentFragment();
+  viperHTML.wire()(_templateObject).forEach(function (link) {
+    return fragment.appendChild(link);
+  });
+  document.head.appendChild(fragment);
+}, { once: true });
+
 // make it available offline
 if ('serviceWorker' in navigator) {
   navigator.serviceWorker.register('/sw.js');
 }
-
-// add unnecessary stuff
-undefined.onload = function () {
-  document.head.appendChild(viperHTML.wire()(_templateObject));
-};

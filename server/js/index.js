@@ -24,8 +24,8 @@ const render = require('./render');
 const pageHead = {
   'Content-Type': 'text/html',
   Link: [
-	  `</css/bundle.css>; rel=preload; as=style`,
-	  `</js/bundle.js>; rel=preload; as=script`
+    `</css/bundle.css>; rel=preload; as=style`,
+    `</js/bundle.js>; rel=preload; as=script`
   ].join( ', ' )
 };
 

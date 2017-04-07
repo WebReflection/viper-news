@@ -11,7 +11,7 @@
     "generate-css": "bash ./bash/generate-css",
     "generate-views": "bash ./bash/generate-views",
     "start": "node ./server/js/index.js",
-    "sw": " uglifyjs -mc warnings=false ./public/js/sw.js -o ./public/sw.js"
+    "sw": "uglifyjs -mc warnings=false ./public/js/sw.js -o ./public/sw.js"
   },
   "author": "Andrea Giammarchi",
   "license": "ISC",
