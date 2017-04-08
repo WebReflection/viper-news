@@ -1,8 +1,14 @@
 body {
   margin: 0;
-  font-family: sans-serif;
   background-color: #f4f4f4;
   overflow-y: scroll;
+  font-family: -apple-system, BlinkMacSystemFont,
+               'avenir next', avenir,
+               helvetica, 'helvetica neue',
+               ubuntu,
+               roboto, noto,
+               'segoe ui', arial,
+               sans-serif;
 }
 
 .hidden {

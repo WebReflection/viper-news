@@ -78,7 +78,10 @@ app.get('/user/:id.json', (req, res) => {
 app.get('/user/:id', (req, res) => {
   res.writeHead(200, pageHead);
   hn.user(req.params.id).then(user => render.page(
-    chunk => res.write(chunk),
+    chunk => {
+      res.write(chunk);
+      res.flush();
+    },
     {
       title: `Profile: ${user.id} | ${title}`,
       header: render.header({
@@ -124,7 +127,10 @@ const augmentComment = item => Object.assign(
 app.get('/item/:id', (req, res) => {
   res.writeHead(200, pageHead);
   hn.item(req.params.id).then(item => render.page(
-    chunk => res.write(chunk),
+    chunk => {
+      res.write(chunk);
+      res.flush();
+    },
     {
       title: item.title,
       header: render.header({
@@ -149,7 +155,10 @@ app.get('/about', (req, res) => {
 
   res.writeHead(200, pageHead);
   render.page(
-    chunk => res.write(chunk),
+    chunk => {
+      res.write(chunk);
+      res.flush();
+    },
     Object.assign(
       {
         header: render.header(info),
@@ -217,7 +226,10 @@ function serve(res, info) {
   // streaming items as these arrive
   res.writeHead(200, pageHead);
   hn.story(info.story).then(items => render.page(
-    chunk => res.write(chunk),
+    chunk => {
+      res.write(chunk);
+      res.flush();
+    },
     Object.assign(
       {
         header: render.header(info),
