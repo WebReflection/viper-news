@@ -23,7 +23,9 @@ self.addEventListener('fetch', function (e) {
   e.respondWith(openCache.then(function (cache) {
     return cache.match(request).then(function (response) {
       var remote = fetch(request).then(function (response) {
-        cache.put(request, response.clone());
+        if (199 < response.status && response.status < 400) {
+          cache.put(request, response.clone());
+        }
         return response;
       });
       return any([response || remote, remote]);

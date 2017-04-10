@@ -24,8 +24,10 @@ self.addEventListener('fetch', e => {
       response => {
         const remote = fetch(request).then(
           response => {
+            if (199 < response.status && response.status < 400) {
               cache.put(request, response.clone());
-              return response;
+            }
+            return response;
           }
         );
         return any([response || remote, remote]);
