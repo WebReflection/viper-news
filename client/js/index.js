@@ -99,28 +99,3 @@ const mapComment = comment => {
 require('onpushstate');
 addEventListener('pushstate', showPage);
 addEventListener('popstate', showPage);
-
-// add extra favicon circus in the mix
-// after checking for ServiceWorker capabilities
-addEventListener(
-  'load',
-  () => {
-    const favicon = () => document.head.appendChild(
-      (viperHTML.wire()`
-        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-        <link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
-        <link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16">
-        <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
-      `).reduce(
-        (f, children) => (f.appendChild(children), f),
-        document.createDocumentFragment()
-      )
-    );
-
-    if ('serviceWorker' in navigator)
-      navigator.serviceWorker.register('/sw.js').then(favicon);
-    else
-      favicon();
-  },
-  {once: true}
-);

@@ -2,14 +2,13 @@
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
-var _templateObject = _taggedTemplateLiteral(["\n        <link rel=\"apple-touch-icon\" sizes=\"180x180\" href=\"/apple-touch-icon.png\">\n        <link rel=\"icon\" type=\"image/png\" href=\"/favicon-32x32.png\" sizes=\"32x32\">\n        <link rel=\"icon\" type=\"image/png\" href=\"/favicon-16x16.png\" sizes=\"16x16\">\n        <link rel=\"mask-icon\" href=\"/safari-pinned-tab.svg\" color=\"#5bbad5\">\n      "], ["\n        <link rel=\"apple-touch-icon\" sizes=\"180x180\" href=\"/apple-touch-icon.png\">\n        <link rel=\"icon\" type=\"image/png\" href=\"/favicon-32x32.png\" sizes=\"32x32\">\n        <link rel=\"icon\" type=\"image/png\" href=\"/favicon-16x16.png\" sizes=\"16x16\">\n        <link rel=\"mask-icon\" href=\"/safari-pinned-tab.svg\" color=\"#5bbad5\">\n      "]),
-    _templateObject2 = _taggedTemplateLiteral(["", ""], ["", ""]),
-    _templateObject3 = _taggedTemplateLiteral(["\n<h1>About this site</h1>\n<p>\n  Hacker News clones are the new TodoMVC.\n  <a href=\"https://svelte-hn.now.sh/\">Svelte</a> has one,\n  and most you can see here has been forked from it,\n  <a href='https://vue-hn.now.sh'>Vue</a> has one,\n  <a href='https://next-news.now.sh'>Next</a> has one,\n  <a href='https://react-hn.appspot.com'>React</a> and\n  <a href='https://preact-hn.appspot.com'>Preact</a> have theirs.\n  And now, <strong>viperHTML</strong> has one.\n</p>\n<p>\n  <a href=\"https://github.com/WebReflection/viperHTML\">viperHTML</a> is the isomorphic version of <a href=\"https://github.com/WebReflection/hyperHTML\">hyperHTML</a>,\n  a new just-in-time template literals compiler that targets DOM nodes on the client and string interpolations on the server.\n\n  The result is a natural, fast, compact and easy way to create Web apps, offering a solution for your project views.\n  It plays well with both vanilla JS and frameworks, and it's widely compatible for boh browsers and servers.\n</p>\n<p>\n  This app is designed to test viperHTML's ideas and see if there are any essential features that we're missing,\n  and to act as an example for people looking to build their own viperHTML based apps.\n  You can see the <a href='https://github.com/WebReflection/viper-news'>source code</a>.\n</p>"], ["\n<h1>About this site</h1>\n<p>\n  Hacker News clones are the new TodoMVC.\n  <a href=\"https://svelte-hn.now.sh/\">Svelte</a> has one,\n  and most you can see here has been forked from it,\n  <a href='https://vue-hn.now.sh'>Vue</a> has one,\n  <a href='https://next-news.now.sh'>Next</a> has one,\n  <a href='https://react-hn.appspot.com'>React</a> and\n  <a href='https://preact-hn.appspot.com'>Preact</a> have theirs.\n  And now, <strong>viperHTML</strong> has one.\n</p>\n<p>\n  <a href=\"https://github.com/WebReflection/viperHTML\">viperHTML</a> is the isomorphic version of <a href=\"https://github.com/WebReflection/hyperHTML\">hyperHTML</a>,\n  a new just-in-time template literals compiler that targets DOM nodes on the client and string interpolations on the server.\n\n  The result is a natural, fast, compact and easy way to create Web apps, offering a solution for your project views.\n  It plays well with both vanilla JS and frameworks, and it's widely compatible for boh browsers and servers.\n</p>\n<p>\n  This app is designed to test viperHTML's ideas and see if there are any essential features that we're missing,\n  and to act as an example for people looking to build their own viperHTML based apps.\n  You can see the <a href='https://github.com/WebReflection/viper-news'>source code</a>.\n</p>"]),
-    _templateObject4 = _taggedTemplateLiteral(["\n<article class='comment'>\n  <span class='meta'><a href='", "'> ", " </a> ", " ago</span>\n  <div class='body'>\n    <p>", "</p>\n  </div>\n  <ul class='", "'>", "</ul>\n</article>"], ["\n<article class='comment'>\n  <span class='meta'><a href='", "'> ", " </a> ", " ago</span>\n  <div class='body'>\n    <p>", "</p>\n  </div>\n  <ul class='", "'>", "</ul>\n</article>"]),
-    _templateObject5 = _taggedTemplateLiteral(["\n<article class=\"item\">\n  <a class=\"main-link\" href=\"", "\">\n    ", "\n    <small> ", " </small>\n  </a>\n  <p class=\"meta\">\n    ", " points by <a href=\"", "\"> ", " </a> ", " ago\n  </p>\n</article>\n<h3>\n  ", "\n</h3>\n<div class='comments'>", "</div>"], ["\n<article class=\"item\">\n  <a class=\"main-link\" href=\"", "\">\n    ", "\n    <small> ", " </small>\n  </a>\n  <p class=\"meta\">\n    ", " points by <a href=\"", "\"> ", " </a> ", " ago\n  </p>\n</article>\n<h3>\n  ", "\n</h3>\n<div class='comments'>", "</div>"]),
-    _templateObject6 = _taggedTemplateLiteral(["\n<a class='more' href='", "'>More...</a>"], ["\n<a class='more' href='", "'>More...</a>"]),
-    _templateObject7 = _taggedTemplateLiteral(["\n<article>\n  <h2>\n    <a href='", "'>\n      ", "\n      <small> ", " </small>\n    </a>\n  </h2>\n  <p>\n    ", " points by <a href='", "'> ", " </a>", "</p>\n  <span class='index'>\n    ", "\n  </span>\n</article>"], ["\n<article>\n  <h2>\n    <a href='", "'>\n      ", "\n      <small> ", " </small>\n    </a>\n  </h2>\n  <p>\n    ", " points by <a href='", "'> ", " </a>", "</p>\n  <span class='index'>\n    ", "\n  </span>\n</article>"]),
-    _templateObject8 = _taggedTemplateLiteral(["\n<h1> ", " </h1>\n<p>...joined <strong> ", " </strong>, and has <strong> ", " </strong> karma</p>\n<p>\n  <a href=\"", "\"> submissions </a> /\n  <a href=\"", "\"> comments </a> /\n  <a href=\"", "\"> favourites </a>\n</p>\n<div class=\"", "\">\n  <p>", "</p>\n</div>"], ["\n<h1> ", " </h1>\n<p>...joined <strong> ", " </strong>, and has <strong> ", " </strong> karma</p>\n<p>\n  <a href=\"", "\"> submissions </a> /\n  <a href=\"", "\"> comments </a> /\n  <a href=\"", "\"> favourites </a>\n</p>\n<div class=\"", "\">\n  <p>", "</p>\n</div>"]);
+var _templateObject = _taggedTemplateLiteral(["", ""], ["", ""]),
+    _templateObject2 = _taggedTemplateLiteral(["\n<h1>About this site</h1>\n<p>\n  Hacker News clones are the new TodoMVC.\n  <a href=\"https://svelte-hn.now.sh/\">Svelte</a> has one,\n  and most you can see here has been forked from it,\n  <a href='https://vue-hn.now.sh'>Vue</a> has one,\n  <a href='https://next-news.now.sh'>Next</a> has one,\n  <a href='https://react-hn.appspot.com'>React</a> and\n  <a href='https://preact-hn.appspot.com'>Preact</a> have theirs.\n  And now, <strong>viperHTML</strong> has one.\n</p>\n<p>\n  <a href=\"https://github.com/WebReflection/viperHTML\">viperHTML</a> is the isomorphic version of <a href=\"https://github.com/WebReflection/hyperHTML\">hyperHTML</a>,\n  a new just-in-time template literals compiler that targets DOM nodes on the client and string interpolations on the server.\n\n  The result is a natural, fast, compact and easy way to create Web apps, offering a solution for your project views.\n  It plays well with both vanilla JS and frameworks, and it's widely compatible for boh browsers and servers.\n</p>\n<p>\n  This app is designed to test viperHTML's ideas and see if there are any essential features that we're missing,\n  and to act as an example for people looking to build their own viperHTML based apps.\n  You can see the <a href='https://github.com/WebReflection/viper-news'>source code</a>.\n</p>"], ["\n<h1>About this site</h1>\n<p>\n  Hacker News clones are the new TodoMVC.\n  <a href=\"https://svelte-hn.now.sh/\">Svelte</a> has one,\n  and most you can see here has been forked from it,\n  <a href='https://vue-hn.now.sh'>Vue</a> has one,\n  <a href='https://next-news.now.sh'>Next</a> has one,\n  <a href='https://react-hn.appspot.com'>React</a> and\n  <a href='https://preact-hn.appspot.com'>Preact</a> have theirs.\n  And now, <strong>viperHTML</strong> has one.\n</p>\n<p>\n  <a href=\"https://github.com/WebReflection/viperHTML\">viperHTML</a> is the isomorphic version of <a href=\"https://github.com/WebReflection/hyperHTML\">hyperHTML</a>,\n  a new just-in-time template literals compiler that targets DOM nodes on the client and string interpolations on the server.\n\n  The result is a natural, fast, compact and easy way to create Web apps, offering a solution for your project views.\n  It plays well with both vanilla JS and frameworks, and it's widely compatible for boh browsers and servers.\n</p>\n<p>\n  This app is designed to test viperHTML's ideas and see if there are any essential features that we're missing,\n  and to act as an example for people looking to build their own viperHTML based apps.\n  You can see the <a href='https://github.com/WebReflection/viper-news'>source code</a>.\n</p>"]),
+    _templateObject3 = _taggedTemplateLiteral(["\n<article class='comment'>\n  <span class='meta'><a href='", "'> ", " </a> ", " ago</span>\n  <div class='body'>\n    <p>", "</p>\n  </div>\n  <ul class='", "'>", "</ul>\n</article>"], ["\n<article class='comment'>\n  <span class='meta'><a href='", "'> ", " </a> ", " ago</span>\n  <div class='body'>\n    <p>", "</p>\n  </div>\n  <ul class='", "'>", "</ul>\n</article>"]),
+    _templateObject4 = _taggedTemplateLiteral(["\n<article class=\"item\">\n  <a class=\"main-link\" href=\"", "\">\n    ", "\n    <small> ", " </small>\n  </a>\n  <p class=\"meta\">\n    ", " points by <a href=\"", "\"> ", " </a> ", " ago\n  </p>\n</article>\n<h3>\n  ", "\n</h3>\n<div class='comments'>", "</div>"], ["\n<article class=\"item\">\n  <a class=\"main-link\" href=\"", "\">\n    ", "\n    <small> ", " </small>\n  </a>\n  <p class=\"meta\">\n    ", " points by <a href=\"", "\"> ", " </a> ", " ago\n  </p>\n</article>\n<h3>\n  ", "\n</h3>\n<div class='comments'>", "</div>"]),
+    _templateObject5 = _taggedTemplateLiteral(["\n<a class='more' href='", "'>More...</a>"], ["\n<a class='more' href='", "'>More...</a>"]),
+    _templateObject6 = _taggedTemplateLiteral(["\n<article>\n  <h2>\n    <a href='", "'>\n      ", "\n      <small> ", " </small>\n    </a>\n  </h2>\n  <p>\n    ", " points by <a href='", "'> ", " </a>", "</p>\n  <span class='index'>\n    ", "\n  </span>\n</article>"], ["\n<article>\n  <h2>\n    <a href='", "'>\n      ", "\n      <small> ", " </small>\n    </a>\n  </h2>\n  <p>\n    ", " points by <a href='", "'> ", " </a>", "</p>\n  <span class='index'>\n    ", "\n  </span>\n</article>"]),
+    _templateObject7 = _taggedTemplateLiteral(["\n<h1> ", " </h1>\n<p>...joined <strong> ", " </strong>, and has <strong> ", " </strong> karma</p>\n<p>\n  <a href=\"", "\"> submissions </a> /\n  <a href=\"", "\"> comments </a> /\n  <a href=\"", "\"> favourites </a>\n</p>\n<div class=\"", "\">\n  <p>", "</p>\n</div>"], ["\n<h1> ", " </h1>\n<p>...joined <strong> ", " </strong>, and has <strong> ", " </strong> karma</p>\n<p>\n  <a href=\"", "\"> submissions </a> /\n  <a href=\"", "\"> comments </a> /\n  <a href=\"", "\"> favourites </a>\n</p>\n<div class=\"", "\">\n  <p>", "</p>\n</div>"]);
 
 function _taggedTemplateLiteral(strings, raw) { return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
@@ -120,18 +119,6 @@ function _taggedTemplateLiteral(strings, raw) { return Object.freeze(Object.defi
     require('onpushstate');
     addEventListener('pushstate', showPage);
     addEventListener('popstate', showPage);
-
-    // add extra favicon circus in the mix
-    // after checking for ServiceWorker capabilities
-    addEventListener('load', function () {
-      var favicon = function favicon() {
-        return document.head.appendChild(viperHTML.wire()(_templateObject).reduce(function (f, children) {
-          return f.appendChild(children), f;
-        }, document.createDocumentFragment()));
-      };
-
-      if ('serviceWorker' in navigator) navigator.serviceWorker.register('/sw.js').then(favicon);else favicon();
-    }, { once: true });
   }, { "./render": 2, "onpushstate": 5, "viperhtml": 6 }], 2: [function (require, module, exports) {
     var viperHTML = require('viperhtml');
 
@@ -152,7 +139,7 @@ function _taggedTemplateLiteral(strings, raw) { return Object.freeze(Object.defi
 
     module.exports = {
       main: function main(model) {
-        return wire.main(_templateObject2, model);
+        return wire.main(_templateObject, model);
       },
 
       item: function item(model) {
@@ -1008,26 +995,26 @@ function _taggedTemplateLiteral(strings, raw) { return Object.freeze(Object.defi
     }).call(this, typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {});
   }, { "html-escaper": 3, "hyperhtml": 4 }], 8: [function (require, module, exports) {
     module.exports = function (render, model) {
-      return render(_templateObject3);
+      return render(_templateObject2);
     };
   }, {}], 9: [function (require, module, exports) {
     module.exports = function (render, model) {
-      return render(_templateObject4, "/user/" + model.by, model.by, model.timeBetween, model.text, model.comments.length ? 'children' : 'hidden', model.comments);
+      return render(_templateObject3, "/user/" + model.by, model.by, model.timeBetween, model.text, model.comments.length ? 'children' : 'hidden', model.comments);
     };
   }, {}], 10: [function (require, module, exports) {
     module.exports = function (render, model) {
-      return render(_templateObject5, model.url, model.title, model.hostname ? "(" + model.hostname.replace(/^www\./, '') + ")" : '', model.score, "/user/" + model.by, model.by, model.timeBetween, model.descendants ? model.descendants + " comments" : 'No comments yet', model.comments);
+      return render(_templateObject4, model.url, model.title, model.hostname ? "(" + model.hostname.replace(/^www\./, '') + ")" : '', model.score, "/user/" + model.by, model.by, model.timeBetween, model.descendants ? model.descendants + " comments" : 'No comments yet', model.comments);
     };
   }, {}], 11: [function (require, module, exports) {
     module.exports = function (render, model) {
-      return render(_templateObject6, model.next);
+      return render(_templateObject5, model.next);
     };
   }, {}], 12: [function (require, module, exports) {
     module.exports = function (render, model) {
-      return render(_templateObject7, model.url ? model.url : "/item/" + model.id, model.title, model.hostname ? "(" + model.hostname.replace(/^www\./, '') + ")" : '', model.score, "/user/" + model.by, model.by, model.timeBetween + " ago | <a href='/item/" + model.id + "'>" + (model.descendants || 0) + " comments</a>", model.index);
+      return render(_templateObject6, model.url ? model.url : "/item/" + model.id, model.title, model.hostname ? "(" + model.hostname.replace(/^www\./, '') + ")" : '', model.score, "/user/" + model.by, model.by, model.timeBetween + " ago | <a href='/item/" + model.id + "'>" + (model.descendants || 0) + " comments</a>", model.index);
     };
   }, {}], 13: [function (require, module, exports) {
     module.exports = function (render, model) {
-      return render(_templateObject8, model.id, model.ago, model.karma, 'https://news.ycombinator.com/submitted?id=' + model.id, 'https://news.ycombinator.com/threads?id=' + model.id, 'https://news.ycombinator.com/favorites?id=' + model.id, 'about' + (model.about ? '' : ' hidden'), model.about || '');
+      return render(_templateObject7, model.id, model.ago, model.karma, 'https://news.ycombinator.com/submitted?id=' + model.id, 'https://news.ycombinator.com/threads?id=' + model.id, 'https://news.ycombinator.com/favorites?id=' + model.id, 'about' + (model.about ? '' : ' hidden'), model.about || '');
     };
   }, {}] }, {}, [1]);

@@ -1,9 +1,5 @@
 'use strict';
 
-var _templateObject = _taggedTemplateLiteral(['\n        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">\n        <link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">\n        <link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16">\n        <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">\n      '], ['\n        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">\n        <link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">\n        <link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16">\n        <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">\n      ']);
-
-function _taggedTemplateLiteral(strings, raw) { return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
-
 var title = 'viperHTML 🐍 Hacker News';
 var viperHTML = require('viperhtml');
 var render = require('./render');
@@ -98,15 +94,3 @@ var mapComment = function mapComment(comment) {
 require('onpushstate');
 addEventListener('pushstate', showPage);
 addEventListener('popstate', showPage);
-
-// add extra favicon circus in the mix
-// after checking for ServiceWorker capabilities
-addEventListener('load', function () {
-  var favicon = function favicon() {
-    return document.head.appendChild(viperHTML.wire()(_templateObject).reduce(function (f, children) {
-      return f.appendChild(children), f;
-    }, document.createDocumentFragment()));
-  };
-
-  if ('serviceWorker' in navigator) navigator.serviceWorker.register('/sw.js').then(favicon);else favicon();
-}, { once: true });

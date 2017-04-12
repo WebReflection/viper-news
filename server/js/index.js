@@ -2,6 +2,7 @@ const compression = require('compression');
 const express = require('express');
 const path = require('path');
 const url = require('url');
+const fs = require('fs');
 
 
 const app = express();
@@ -11,6 +12,9 @@ app.use(express.static(path.join(__dirname, '..', '..', 'public')));
 
 const title = 'viperHTML 🐍 Hacker News';
 const PAGE_SIZE = 20;
+const assets = {
+  style: fs.readFileSync(path.join(__dirname, '..', '..', 'public', 'css', 'bundle.css'))
+};
 
 const shared = new Proxy(
   new String(path.join(__dirname, '..', '..', 'shared', 'js')),
@@ -20,14 +24,6 @@ const shared = new Proxy(
 const ago = shared.ago;
 const timeBetween = shared.timebetween;
 const render = require('./render');
-
-const pageHead = {
-  'Content-Type': 'text/html',
-  Link: [
-    `</css/bundle.css>; rel=preload; as=style`,
-    `</js/bundle.js>; rel=preload; as=script`
-  ].join( ', ' )
-};
 
 const hn = require( './hn' );
 hn.stories.forEach(story => {
@@ -76,12 +72,13 @@ app.get('/user/:id.json', (req, res) => {
 });
 
 app.get('/user/:id', (req, res) => {
-  res.writeHead(200, pageHead);
+  res.writeHead(200, {'Content-Type': 'text/html'});
   hn.user(req.params.id).then(user => render.page(
     chunk => res.write(chunk),
     {
       title: `Profile: ${user.id} | ${title}`,
       header: render.header({
+        style: assets.style,
         story: 'user',
         stories: hn.stories
       }),
@@ -122,12 +119,13 @@ const augmentComment = item => Object.assign(
 );
 
 app.get('/item/:id', (req, res) => {
-  res.writeHead(200, pageHead);
+  res.writeHead(200, {'Content-Type': 'text/html'});
   hn.item(req.params.id).then(item => render.page(
     chunk => res.write(chunk),
     {
       title: item.title,
       header: render.header({
+        style: assets.style,
         story: 'item',
         stories: hn.stories
       }),
@@ -147,12 +145,16 @@ app.get('/about', (req, res) => {
     stories: hn.stories
   };
 
-  res.writeHead(200, pageHead);
+  res.writeHead(200, {'Content-Type': 'text/html'});
   render.page(
     chunk => res.write(chunk),
     Object.assign(
       {
-        header: render.header(info),
+        header: render.header(
+          Object.assign(info, {
+            style: assets.style
+          })
+        ),
         main: render.about(info)
       },
       info
@@ -216,12 +218,16 @@ function serve(res, info) {
   const start = end - PAGE_SIZE;
 
   // streaming items as these arrive
-  res.writeHead(200, pageHead);
+  res.writeHead(200, {'Content-Type': 'text/html'});
   hn.story(info.story).then(items => render.page(
     chunk => res.write(chunk),
     Object.assign(
       {
-        header: render.header(info),
+        header: render.header(
+          Object.assign(info, {
+            style: assets.style
+          })
+        ),
         main: items.slice(start, end).map((item, i) =>
           hn.item(item)
             .then(item =>
