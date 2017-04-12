@@ -15,7 +15,7 @@ module.exports = (render, model) => render`
     <link rel="manifest" href="/manifest.json">
     <style>${model.style}</style>
     <script>!function(D,N,S){
-      function $(){D.querySelector('script').src='/js/bundle.js'}
+      function $(){D.head.appendChild(D.createElement('script')).src='/js/bundle.js'}
       D.addEventListener('DOMContentLoaded',function(){(S in N)?N[S].register('/sw.js').then($):$()})
     }(document,navigator,'serviceWorker')</script>
     </script>
