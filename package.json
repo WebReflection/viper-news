@@ -7,6 +7,7 @@
     "babel": "babel ./client/js --out-dir ./public/js --presets=es2015",
     "build": "npm run generate-views && npm run generate-css && npm run bundle && npm run babel && npm run minify && npm run sw",
     "bundle": "browserify ./client/js/index.js -o ./client/js/bundle.max.js",
+    "deploy": "npm run build && yes Y | gcloud app deploy",
     "minify": "uglifyjs -mc warnings=false ./public/js/bundle.max.js -o ./public/js/bundle.js && rm ./client/js/bundle.max.js",
     "generate-css": "bash ./bash/generate-css",
     "generate-views": "bash ./bash/generate-views",

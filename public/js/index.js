@@ -1,6 +1,6 @@
 'use strict';
 
-var _templateObject = _taggedTemplateLiteral(['\n      <link rel="apple-touch-icon" sizes="57x57" href="/img/apple-icon-57x57.png">\n      <link rel="apple-touch-icon" sizes="60x60" href="/img/apple-icon-60x60.png">\n      <link rel="apple-touch-icon" sizes="72x72" href="/img/apple-icon-72x72.png">\n      <link rel="apple-touch-icon" sizes="76x76" href="/img/apple-icon-76x76.png">\n      <link rel="apple-touch-icon" sizes="114x114" href="/img/apple-icon-114x114.png">\n      <link rel="apple-touch-icon" sizes="120x120" href="/img/apple-icon-120x120.png">\n      <link rel="apple-touch-icon" sizes="144x144" href="/img/apple-icon-144x144.png">\n      <link rel="apple-touch-icon" sizes="152x152" href="/img/apple-icon-152x152.png">\n      <link rel="apple-touch-icon" sizes="180x180" href="/img/apple-icon-180x180.png">\n      <link rel="icon" type="image/png" sizes="192x192"  href="/img/android-icon-192x192.png">\n      <link rel="icon" type="image/png" sizes="96x96" href="/img/favicon-96x96.png">\n      <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32x32.png">\n      <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16x16.png">\n    '], ['\n      <link rel="apple-touch-icon" sizes="57x57" href="/img/apple-icon-57x57.png">\n      <link rel="apple-touch-icon" sizes="60x60" href="/img/apple-icon-60x60.png">\n      <link rel="apple-touch-icon" sizes="72x72" href="/img/apple-icon-72x72.png">\n      <link rel="apple-touch-icon" sizes="76x76" href="/img/apple-icon-76x76.png">\n      <link rel="apple-touch-icon" sizes="114x114" href="/img/apple-icon-114x114.png">\n      <link rel="apple-touch-icon" sizes="120x120" href="/img/apple-icon-120x120.png">\n      <link rel="apple-touch-icon" sizes="144x144" href="/img/apple-icon-144x144.png">\n      <link rel="apple-touch-icon" sizes="152x152" href="/img/apple-icon-152x152.png">\n      <link rel="apple-touch-icon" sizes="180x180" href="/img/apple-icon-180x180.png">\n      <link rel="icon" type="image/png" sizes="192x192"  href="/img/android-icon-192x192.png">\n      <link rel="icon" type="image/png" sizes="96x96" href="/img/favicon-96x96.png">\n      <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32x32.png">\n      <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16x16.png">\n    ']);
+var _templateObject = _taggedTemplateLiteral(['\n        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">\n        <link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">\n        <link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16">\n        <link rel="manifest" href="/manifest.json">\n        <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">\n        <meta name="theme-color" content="#ffffff">\n        <meta name="apple-mobile-web-app-capable" content="yes">\n        <meta name="mobile-web-app-capable" content="yes">\n      '], ['\n        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">\n        <link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">\n        <link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16">\n        <link rel="manifest" href="/manifest.json">\n        <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">\n        <meta name="theme-color" content="#ffffff">\n        <meta name="apple-mobile-web-app-capable" content="yes">\n        <meta name="mobile-web-app-capable" content="yes">\n      ']);
 
 function _taggedTemplateLiteral(strings, raw) { return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
@@ -99,15 +99,14 @@ require('onpushstate');
 addEventListener('pushstate', showPage);
 addEventListener('popstate', showPage);
 
-// add app icons and register SW after first view
+// add favicon circus in the mix
+// after checking for ServiceWorker capabilities
 addEventListener('load', function () {
-  var onLoad = function onLoad() {
-    var fragment = document.createDocumentFragment();
-    viperHTML.wire()(_templateObject).forEach(function (link) {
-      return fragment.appendChild(link);
-    });
-    document.head.appendChild(fragment);
+  var favicon = function favicon() {
+    return document.head.appendChild(viperHTML.wire()(_templateObject).reduce(function (f, children) {
+      return f.appendChild(children), f;
+    }, document.createDocumentFragment()));
   };
 
-  'serviceWorker' in navigator ? navigator.serviceWorker.register('/sw.js').then(onLoad) : onLoad();
+  if ('serviceWorker' in navigator) navigator.serviceWorker.register('/sw.js').then(favicon);else favicon();
 }, { once: true });
