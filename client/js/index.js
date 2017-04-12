@@ -100,14 +100,7 @@ require('onpushstate');
 addEventListener('pushstate', showPage);
 addEventListener('popstate', showPage);
 
-if ('serviceWorker' in navigator) addEventListener(
-  'load',
-  () => navigator.serviceWorker.register('/sw.js'),
-  {once: true}
-);
-
-/*
-// add favicon circus in the mix
+// add extra favicon circus in the mix
 // after checking for ServiceWorker capabilities
 addEventListener(
   'load',
@@ -131,4 +124,3 @@ addEventListener(
   },
   {once: true}
 );
-*/
