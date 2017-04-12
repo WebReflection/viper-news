@@ -4,6 +4,7 @@
     "display": "standalone",
     "name": "🐍 Hacker News",
     "orientation": "portrait-primary",
+    "short_name": "🐍 HN",
     "theme_color": "#ffffff",
     "icons": [
         {

@@ -1,9 +1,5 @@
 'use strict';
 
-var _templateObject = _taggedTemplateLiteral(['\n        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">\n        <link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">\n        <link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16">\n        <link rel="manifest" href="/manifest.json">\n        <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">\n        <meta name="theme-color" content="#ffffff">\n        <meta name="apple-mobile-web-app-capable" content="yes">\n        <meta name="mobile-web-app-capable" content="yes">\n      '], ['\n        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">\n        <link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">\n        <link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16">\n        <link rel="manifest" href="/manifest.json">\n        <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">\n        <meta name="theme-color" content="#ffffff">\n        <meta name="apple-mobile-web-app-capable" content="yes">\n        <meta name="mobile-web-app-capable" content="yes">\n      ']);
-
-function _taggedTemplateLiteral(strings, raw) { return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
-
 var title = 'viperHTML 🐍 Hacker News';
 var viperHTML = require('viperhtml');
 var render = require('./render');
@@ -99,14 +95,33 @@ require('onpushstate');
 addEventListener('pushstate', showPage);
 addEventListener('popstate', showPage);
 
+if ('serviceWorker' in navigator) addEventListener('load', function () {
+  return navigator.serviceWorker.register('/sw.js');
+}, { once: true });
+
+/*
 // add favicon circus in the mix
 // after checking for ServiceWorker capabilities
-addEventListener('load', function () {
-  var favicon = function favicon() {
-    return document.head.appendChild(viperHTML.wire()(_templateObject).reduce(function (f, children) {
-      return f.appendChild(children), f;
-    }, document.createDocumentFragment()));
-  };
+addEventListener(
+  'load',
+  () => {
+    const favicon = () => document.head.appendChild(
+      (viperHTML.wire()`
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+        <link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
+        <link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16">
+        <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+      `).reduce(
+        (f, children) => (f.appendChild(children), f),
+        document.createDocumentFragment()
+      )
+    );
 
-  if ('serviceWorker' in navigator) navigator.serviceWorker.register('/sw.js').then(favicon);else favicon();
-}, { once: true });
+    if ('serviceWorker' in navigator)
+      navigator.serviceWorker.register('/sw.js').then(favicon);
+    else
+      favicon();
+  },
+  {once: true}
+);
+*/
