@@ -13,6 +13,9 @@
     "start": "node ./server/js/index.js",
     "sw": "uglifyjs -mc warnings=false ./public/js/sw.js -o ./public/sw.js"
   },
+  "engines": {
+    "node": ">=6.9"
+  },
   "author": "Andrea Giammarchi",
   "license": "ISC",
   "dependencies": {
