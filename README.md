@@ -1,7 +1,7 @@
 # viper-news
 viperHTML version of the Hacker News app.
 
-https://viper-news.now.sh/
+https://viperhtml-164315.appspot.com/
 
 TODO **backend**
   - [x] show list of items
