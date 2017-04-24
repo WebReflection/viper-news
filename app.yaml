@@ -1,3 +1,7 @@
 env: flex
 runtime: nodejs
-secure: always
+
+handlers:
+- url: /.*
+  script: server/js/index.js
+  secure: always
