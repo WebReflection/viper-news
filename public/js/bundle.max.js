@@ -172,9 +172,9 @@ function _taggedTemplateLiteral(strings, raw) { return Object.freeze(Object.defi
     };
   }, { "../../shared/view/about": 8, "../../shared/view/comment": 9, "../../shared/view/item": 10, "../../shared/view/next": 11, "../../shared/view/summary": 12, "../../shared/view/user": 13, "viperhtml": 6 }], 3: [function (require, module, exports) {
     /*jslint indent: 2 */
+    /*! (c) Andrea Giammarchi - MIT */
     var html = function (O) {
       'use strict';
-      // Andrea Giammarchi - MIT Style License
 
       var reEscape = /[&<>'"]/g,
           reUnescape = /&(?:amp|#38|lt|#60|gt|#62|apos|#39|quot|#34);/g,
@@ -216,7 +216,7 @@ function _taggedTemplateLiteral(strings, raw) { return Object.freeze(Object.defi
 
     try {
       module.exports = html;
-    } catch (ignore) {}
+    } catch (o_O) {}
   }, {}], 4: [function (require, module, exports) {
     var hyperHTML = function () {
       'use strict';
@@ -240,7 +240,7 @@ function _taggedTemplateLiteral(strings, raw) { return Object.freeze(Object.defi
       // A wire ➰ is a bridge between a document fragment
       // and its inevitably lost list of rendered nodes
       //
-      // var render = hyperHTML.wire();
+      // var render = hyperHTML.wire(optObj);
       // render`
       //  <div>Hello Wired!</div>
       // `;
@@ -250,8 +250,8 @@ function _taggedTemplateLiteral(strings, raw) { return Object.freeze(Object.defi
       // This simplifies most task where hyperHTML
       // is used to create the node itself, instead of
       // populating an already known and bound one.
-      hyperHTML.wire = function wire(obj) {
-        return arguments.length < 1 ? wireContent() : wireWeakly(obj);
+      hyperHTML.wire = function wire(obj, type) {
+        return arguments.length < 1 ? wireContent('html') : obj == null ? wireContent(type || 'html') : wireWeakly(obj, type || 'html');
       };
 
       // - - - - - - - - - - - - - - - - - -  - - - - -
@@ -267,7 +267,7 @@ function _taggedTemplateLiteral(strings, raw) { return Object.freeze(Object.defi
       // Note: always use quotes around attributes, even for events,
       //       booleans, or numbers, otherwise this function fails.
       function attributesSeeker(node, actions) {
-        for (var attribute, value = IE ? uid : uidc, attributes = slice.call(node.attributes), i = 0, length = attributes.length; i < length; i++) {
+        for (var attribute, value = IE ? uid : uidc, attributes = IE ? mapAttributes(node.attributes) : slice.call(node.attributes), i = 0, length = attributes.length; i < length; i++) {
           attribute = attributes[i];
           if (attribute.value === value) {
             // with IE the order doesn't really matter
@@ -306,6 +306,11 @@ function _taggedTemplateLiteral(strings, raw) { return Object.freeze(Object.defi
                   actions.push(setTextContent(text));
                   node.replaceChild(text, child);
                 }
+              }
+              break;
+            case 3:
+              if (node.nodeName === 'STYLE' && child.textContent === uidc) {
+                actions.push(setTextContent(node));
               }
               break;
           }
@@ -356,17 +361,27 @@ function _taggedTemplateLiteral(strings, raw) { return Object.freeze(Object.defi
       //
       // render`<a href="${url}" onclick="${click}">${name}</a>`;
       //
-      // Note: attributes with `on` prefix are set directly as callbacks.
-      //       These won't ever be transformed into strings while other
-      //       attributes will be automatically sanitized.
+      // Note: attributes with a special meaning like DOM Level 0
+      //       listeners or accessors properties are directly set
       function setAttribute(node, attribute) {
         var name = attribute.name,
-            isSpecial = SPECIAL_ATTRIBUTE.test(name);
+            isEvent = name.slice(0, 2) === 'on',
+            isSpecial = name in node && !SHOULD_USE_ATTRIBUTE.test(name),
+            oldValue;
         if (isSpecial) node.removeAttribute(name);
-        return isSpecial ? function event(value) {
-          node[name] = value;
-        } : function attr(value) {
-          attribute.value = value;
+        return isSpecial ? function specialAttr(newValue) {
+          if (oldValue !== newValue) {
+            oldValue = newValue;
+            if (isEvent) {
+              node[name] = 'handleEvent' in newValue ? newValue.handleEvent.bind(newValue) : newValue;
+            } else {
+              node[name] = newValue;
+            }
+          }
+        } : function attr(newValue) {
+          if (oldValue !== newValue) {
+            attribute.value = oldValue = newValue;
+          }
         };
       }
 
@@ -384,7 +399,7 @@ function _taggedTemplateLiteral(strings, raw) { return Object.freeze(Object.defi
       // Note: this is the most expensive
       //       update of them all.
       function setVirtualContent(node) {
-        var fragment = document.createDocumentFragment(),
+        var fragment = node.ownerDocument.createDocumentFragment(),
             childNodes = [];
         return function any(value) {
           var i,
@@ -401,7 +416,8 @@ function _taggedTemplateLiteral(strings, raw) { return Object.freeze(Object.defi
             default:
               if (Array.isArray(value)) {
                 if (value.length === 0) {
-                  any(value[0]);
+                  removeNodeList(childNodes, 0);
+                  childNodes = [];
                 } else if (typeof value[0] === 'string') {
                   any(value.join(''));
                 } else {
@@ -431,8 +447,11 @@ function _taggedTemplateLiteral(strings, raw) { return Object.freeze(Object.defi
       //    ${'spaces around means textContent'}
       //  </p>`;
       function setTextContent(node) {
-        return function text(value) {
-          node.textContent = value;
+        var oldValue;
+        return function text(newValue) {
+          if (oldValue !== newValue) {
+            node.textContent = oldValue = newValue;
+          }
         };
       }
 
@@ -449,10 +468,7 @@ function _taggedTemplateLiteral(strings, raw) { return Object.freeze(Object.defi
 
       // given two collections, find
       // the first index that has different content.
-      // If the two lists are the same, return -1
-      // to indicate no differences were found.
       function indexOfDiffereces(a, b) {
-        if (a === b) return -1;
         var i = 0,
             aLength = a.length,
             bLength = b.length;
@@ -470,8 +486,8 @@ function _taggedTemplateLiteral(strings, raw) { return Object.freeze(Object.defi
       // Not the most elegant/robust way but good enough for common cases.
       // (I don't want to include a whole DOM parser for IE only here).
       function injectHTML(fragment, html) {
-        var fallback = IE && /^[^\S]*?<(t(?:head|body|foot|r|d|h))/i.test(html),
-            template = fragment.ownerDocument.createElement('template');
+        var template = fragment.ownerDocument.createElement('template'),
+            fallback = IE && !('content' in template) && /^[^\S]*?<(t(?:head|body|foot|r|d|h))/i.test(html);
         template.innerHTML = fallback ? '<table>' + html + '</table>' : html;
         if (fallback) {
           template = { childNodes: template.querySelectorAll(RegExp.$1) };
@@ -479,15 +495,32 @@ function _taggedTemplateLiteral(strings, raw) { return Object.freeze(Object.defi
         appendNodes(fragment, slice.call((template.content || template).childNodes));
       }
 
+      // IE / Edge Attributes values are resolved at runtime
+      // no attribute.value is found if these are cleaned up when special
+      // TODO: this might be used for every browser instead of slice.call
+      //       to grant both name and value are preserved.
+      //       However, this really looks just an IE/Edge bug.
+      function mapAttributes(attributes) {
+        for (var out = [], i = attributes.length; i--; out[i] = {
+          name: attributes[i].name,
+          value: attributes[i].value
+        }) {}
+        return out;
+      }
+
       // accordingly with the kind of child
-      // it put its content into a parent node
+      // it puts its content into a parent node
       function populateNode(parent, child) {
         switch (child.nodeType) {
           case 1:
             var childNodes = parent.childNodes;
-            if (childNodes.length !== 1 || childNodes[0] !== child) {
-              resetAndPopulate(parent, child);
+            if (0 < childNodes.length) {
+              if (childNodes[0] === child) {
+                removeNodeList(childNodes, 1);
+                break;
+              }
             }
+            resetAndPopulate(parent, child);
             break;
           case 11:
             if (-1 < indexOfDiffereces(parent.childNodes, child.childNodes)) {
@@ -550,27 +583,38 @@ function _taggedTemplateLiteral(strings, raw) { return Object.freeze(Object.defi
       }
 
       // create a new wire for generic DOM content
-      function wireContent() {
-        var content, fragment, render, setup, template;
+      function wireContent(type) {
+        var content, container, fragment, render, setup, template;
         return function update(statics) {
           if (template !== statics) {
             setup = true;
             template = statics;
             fragment = document.createDocumentFragment();
-            render = hyperHTML.bind(fragment);
+            container = type === 'svg' ? document.createElementNS('http://www.w3.org/2000/svg', 'svg') : fragment;
+            render = hyperHTML.bind(container);
           }
           render.apply(null, arguments);
           if (setup) {
             setup = false;
+            if (type === 'svg') {
+              appendNodes(fragment, slice.call(container.childNodes));
+            }
             content = setupAndGetContent(fragment);
           }
           return content();
         };
       }
 
-      // get or create a wired weak reference
-      function wireWeakly(obj) {
-        return wm.get(obj) || (wm.set(obj, wireContent()), wireWeakly(obj));
+      // returns or create a weak wire by ID
+      function wireByID(wires, id, type) {
+        return wires[id] || (wires[id] = wireContent(type));
+      }
+
+      // setup a weak reference if needed and return a wire by ID
+      function wireWeakly(obj, type) {
+        var wires = wm.get(obj) || (wm.set(obj, wires = {}), wires),
+            i = type.indexOf(':');
+        return i < 0 ? wireByID(wires, type, type) : wireByID(wires, type.slice(i + 1), type.slice(0, i) || 'html');
       }
 
       // -------------------------
@@ -594,6 +638,7 @@ function _taggedTemplateLiteral(strings, raw) { return Object.freeze(Object.defi
             html = statics.join(uidc);
         if (IE) {
           IEAttributes = [];
+          removeNodeList(this.childNodes, 0);
           injectHTML(this, html.replace(no, comments));
         } else if (this.nodeType === 1) {
           this.innerHTML = html;
@@ -606,41 +651,12 @@ function _taggedTemplateLiteral(strings, raw) { return Object.freeze(Object.defi
       }
 
       // -------------------------
-      // the trash bin
-      // -------------------------
-
-      // IE used to suck.
-      /*
-      // even in a try/catch this throw an error
-      // since it's reliable though, I'll keep it around
-      function isIE() {
-        var p = document.createElement('p');
-        p.innerHTML = '<i onclick="<!---->">';
-        return p.childNodes[0].onclick == null;
-      }
-      //*/
-
-      // remove and/or and a list of nodes through a fragment
-      /* temporarily removed until it's demonstrated it's needed
-      function updateViaFragment(node, fragment, i) {
-        if (0 < i) {
-          removeNodeList(node.childNodes, i);
-          var slim = fragment.cloneNode();
-          appendNodes(slim, slice.call(fragment.childNodes, i));
-          node.appendChild(fragment, slim);
-        } else {
-          resetAndPopulate(node, fragment);
-        }
-      }
-      //*/
-
-      // -------------------------
       // local variables
       // -------------------------
 
       var
-      // decide special attributes behavior
-      SPECIAL_ATTRIBUTE = /^(?:on[a-z]+|async|autofocus|autoplay|capture|checked|controls|deferred|disabled|formnovalidate|hidden|loop|multiple|muted|required)$/,
+      // some attribute might be present on the element prototype but cannot be set directly
+      SHOULD_USE_ATTRIBUTE = /^style$/i,
 
       // avoids WeakMap to avoid memory pressure, use CSS compatible syntax for IE
       EXPANDO = '_hyper_html: ',
@@ -651,8 +667,12 @@ function _taggedTemplateLiteral(strings, raw) { return Object.freeze(Object.defi
       // use comment nodes with pseudo unique content to setup
       uidc = '<!--' + uid + '-->',
 
-      // threat it differently
-      IE = 'documentMode' in document,
+      // if attributes order is shuffled, threat the browser differently
+      IE = function (p) {
+        p.innerHTML = '<i data-i="" class=""></i>';
+        return (/class/i.test(p.firstChild.attributes[0].name)
+        );
+      }(document.createElement('p')),
           no = IE && new RegExp('([^\\S][a-z]+[a-z0-9_-]*=)([\'"])' + uidc + '\\2', 'g'),
           comments = IE && function ($0, $1, $2) {
         IEAttributes.push($1.slice(1, -1));
@@ -684,9 +704,6 @@ function _taggedTemplateLiteral(strings, raw) { return Object.freeze(Object.defi
         }
       } : new WeakMap(),
           IEAttributes;
-
-      // Simply to avoid duplicated RegExp in viperHTML
-      hyperHTML.SPECIAL_ATTRIBUTE = SPECIAL_ATTRIBUTE;
 
       // -------------------------
       // ⚡️ ️️The End ➰
@@ -808,14 +825,14 @@ function _taggedTemplateLiteral(strings, raw) { return Object.freeze(Object.defi
       //  <div>Hello Wired!</div>
       // `;
       viperHTML.wire = function wire(object) {
-        return arguments.length < 1 ? viperHTML.bind({}) : wires.get(object) || (wires.set(object, wire()), wire(object));
+        return arguments.length < 1 ? viperHTML.bind({}) : wires.get(object) || setWM(wires, object, viperHTML.bind({}));
       };
 
       // An asynchronous wire ➰ is a weakly referenced callback,
       // to be invoked right before the template literals
       // to return a rendered capable of resolving chunks.
       viperHTML.async = function getAsync(object) {
-        return arguments.length < 1 ? createAsync() : asyncs.get(object) || (asyncs.set(object, getAsync()), getAsync(object));
+        return arguments.length < 1 ? createAsync() : asyncs.get(object) || setWM(asyncs, object, createAsync());
       };
 
       // - - - - - - - - - - - - - - - - - -  - - - - -
@@ -877,6 +894,12 @@ function _taggedTemplateLiteral(strings, raw) { return Object.freeze(Object.defi
         return isArray(value) ? value.join('') : value;
       }
 
+      // weakly relate a generic object to a genric value
+      function setWM(wm, object, value) {
+        wm.set(object, value);
+        return value;
+      }
+
       // return the right callback to update a boolean attribute
       // after modifying the template to ignore such attribute if falsy
       function updateBoolean(name, copies, i) {
@@ -930,7 +953,7 @@ function _taggedTemplateLiteral(strings, raw) { return Object.freeze(Object.defi
         });
       }
 
-      // each known hyperHTML update is
+      // each known viperHTML update is
       // kept as simple as possible.
       // the context will be a viper
       function update() {
@@ -969,7 +992,7 @@ function _taggedTemplateLiteral(strings, raw) { return Object.freeze(Object.defi
           ATTRIBUTE_EVENT = /^on[a-z]+$/,
           JS_SHORTCUT = /^[a-z$_]\S*?\(/,
           JS_FUNCTION = /^function\S*?\(/,
-          SPECIAL_ATTRIBUTE = require('hyperhtml').SPECIAL_ATTRIBUTE,
+          SPECIAL_ATTRIBUTE = /^(?:(?:on|allow)[a-z]+|async|autofocus|autoplay|capture|checked|controls|default|defer|disabled|formnovalidate|hidden|ismap|itemscope|loop|multiple|muted|nomodule|novalidate|open|playsinline|readonly|required|reversed|selected|truespeed|typemustmatch|usecache)$/,
           htmlEscape = require('html-escaper').escape,
           asyncs = new WeakMap(),
           vipers = new WeakMap(),
@@ -985,15 +1008,12 @@ function _taggedTemplateLiteral(strings, raw) { return Object.freeze(Object.defi
       // let's cleanup this property now
       delete global.document;
 
-      // just to mimic hyperHTML public statics
-      viperHTML.SPECIAL_ATTRIBUTE = SPECIAL_ATTRIBUTE;
-
       module.exports = viperHTML;
 
       // local class to easily recognize async wires
       function Async() {}
     }).call(this, typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {});
-  }, { "html-escaper": 3, "hyperhtml": 4 }], 8: [function (require, module, exports) {
+  }, { "html-escaper": 3 }], 8: [function (require, module, exports) {
     module.exports = function (render, model) {
       return render(_templateObject2);
     };

@@ -1,2 +1,5 @@
 env: flex
 runtime: nodejs
+
+handlers:
+- secure: always

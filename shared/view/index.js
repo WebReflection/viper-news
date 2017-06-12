@@ -1,6 +1,6 @@
 module.exports = (render, model) => render`
 <!doctype html>
-<html>
+<html lang="en">
   <head>
     <title> ${model.title} </title>
     <meta charset="utf-8">
