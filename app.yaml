@@ -1,7 +1,2 @@
-env: flex
 runtime: nodejs
-
-handlers:
-- url: /.*
-  script: IGNORED
-  secure: always
+env: flex

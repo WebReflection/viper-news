@@ -31,12 +31,12 @@
 .comment .meta {
   display: block;
   font-size: 14px;
-  color: #888;
+  color: #777;
   margin: 0 0 1em 0;
 }
 
 .comment a {
-  color: #888;
+  color: #777;
 }
 
 /* prevent crazy overflow layout bug on mobile */

@@ -6,6 +6,12 @@ const fs = require('fs');
 
 
 const app = express();
+app.enable('trust proxy');
+app.use(function (req, res, next) {
+  return req.secure || ('localhost' === req.hostname) ?
+    next() :
+    res.redirect('https://' + req.headers.host + req.url);
+});
 app.use(compression({threshold: 0}));
 app.use(express.static(path.join(__dirname, '..', '..', 'public')));
 

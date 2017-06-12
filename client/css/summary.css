@@ -17,18 +17,18 @@ article h2 a {
 
 article p {
   font-size: 0.8em;
-  color: #888;
+  color: #777;
   margin: 0;
 }
 
 article small {
-  color: #888;
+  color: #777;
 }
 article .index {
   position: absolute;
   font-size: 1.6em;
   font-weight: 200;
-  color: #888;
+  color: #777;
   left: 0.2em;
   top: 0;
   text-align: right;
