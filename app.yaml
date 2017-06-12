@@ -2,4 +2,6 @@ env: flex
 runtime: nodejs
 
 handlers:
-- secure: always
+- url: /.*
+  script: IGNORED
+  secure: always
