@@ -14,7 +14,7 @@ var any = function any($) {
 
 self.addEventListener('install', function (e) {
   e.waitUntil(openCache.then(function (cache) {
-    return cache.addAll(['/top/1', '/js/bundle.js']);
+    return cache.addAll(['/js/bundle.js', '/top/1']);
   }));
 });
 

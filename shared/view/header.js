@@ -12,5 +12,4 @@ module.exports = (render, model) => render`
           href="/about"> about </a>
     </li>
   `)}</ul>
-  </ul>
 </nav>`;

@@ -10,8 +10,8 @@ const any = $ => new Promise((D, E, A, L) => {
 self.addEventListener('install', e => {
   e.waitUntil(
     openCache.then(cache => cache.addAll([
-      '/top/1',
-      '/js/bundle.js'
+      '/js/bundle.js',
+      '/top/1'
     ]))
   );
 });
