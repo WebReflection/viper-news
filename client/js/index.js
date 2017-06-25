@@ -98,7 +98,3 @@ const mapComment = comment => {
 require('onpushstate');
 addEventListener('pushstate', showPage);
 addEventListener('popstate', showPage);
-
-if ('serviceWorker' in navigator) {
-  navigator.serviceWorker.register('/sw.js');
-}

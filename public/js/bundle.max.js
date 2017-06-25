@@ -118,10 +118,6 @@ function _taggedTemplateLiteral(strings, raw) { return Object.freeze(Object.defi
     require('onpushstate');
     addEventListener('pushstate', showPage);
     addEventListener('popstate', showPage);
-
-    if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('/sw.js');
-    }
   }, { "./render": 2, "onpushstate": 4 }], 2: [function (require, module, exports) {
     var hyperHTML = require('hyperhtml');
 
