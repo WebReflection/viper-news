@@ -4,7 +4,7 @@ var _templateObject = _taggedTemplateLiteral(['', ''], ['', '']);
 
 function _taggedTemplateLiteral(strings, raw) { return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
-var viperHTML = require('viperhtml');
+var hyperHTML = require('hyperhtml');
 
 var view = {
   about: require('../../shared/view/about'),
@@ -16,9 +16,9 @@ var view = {
 };
 
 var wire = {
-  main: viperHTML.bind(document.querySelector('main')),
-  user: viperHTML.wire(),
-  next: viperHTML.wire()
+  main: hyperHTML.bind(document.querySelector('main')),
+  user: hyperHTML.wire(),
+  next: hyperHTML.wire()
 };
 
 module.exports = {
@@ -27,17 +27,17 @@ module.exports = {
   },
 
   item: function item(model) {
-    return view.item(viperHTML.wire(model), model);
+    return view.item(hyperHTML.wire(model), model);
   },
   comment: function comment(model) {
-    return view.comment(viperHTML.wire(model), model);
+    return view.comment(hyperHTML.wire(model), model);
   },
 
   about: function about(model) {
     return view.about(wire.main, model);
   },
   summary: function summary(model) {
-    return view.summary(viperHTML.wire(model), model);
+    return view.summary(hyperHTML.wire(model), model);
   },
 
   // it could've been like the server-side one

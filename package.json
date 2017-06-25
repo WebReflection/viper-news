@@ -24,9 +24,10 @@
     "compression": "^1.6.2",
     "express": "^4.15.2",
     "firebase": "^3.7.4",
+    "hyperhtml": "^0.13.0",
     "lru-cache": "^4.0.2",
     "onpushstate": "^0.1.0",
-    "viperhtml": "^0.6.1"
+    "viperhtml": "^0.8.0"
   },
   "devDependencies": {
     "babel-cli": "^6.24.0",

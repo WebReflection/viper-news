@@ -14,11 +14,7 @@ module.exports = (render, model) => render`
     <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
     <link rel="manifest" href="/manifest.json">
     <style>${model.style}</style>
-    <script>!function(D,N,S){
-      function $(){D.head.appendChild(D.createElement('script')).src='/js/bundle.js'}
-      D.addEventListener('DOMContentLoaded',function(){(S in N)?N[S].register('/sw.js').then($):$()})
-    }(document,navigator,'serviceWorker')</script>
-    </script>
+    <script src="/js/bundle.js" async></script>
   </head>
   <body>
     <header>${model.header}</header>

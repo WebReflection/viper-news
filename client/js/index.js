@@ -1,5 +1,4 @@
 const title = 'viperHTML 🐍 Hacker News';
-const viperHTML = require('viperhtml');
 const render = require('./render');
 
 // basically this is the router
@@ -99,3 +98,7 @@ const mapComment = comment => {
 require('onpushstate');
 addEventListener('pushstate', showPage);
 addEventListener('popstate', showPage);
+
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('/sw.js');
+}

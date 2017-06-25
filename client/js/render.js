@@ -1,4 +1,4 @@
-const viperHTML = require('viperhtml');
+const hyperHTML = require('hyperhtml');
 
 const view = {
   about: require('../../shared/view/about'),
@@ -10,20 +10,20 @@ const view = {
 };
 
 const wire = {
-  main: viperHTML.bind(document.querySelector('main')),
-  user: viperHTML.wire(),
-  next: viperHTML.wire()
+  main: hyperHTML.bind(document.querySelector('main')),
+  user: hyperHTML.wire(),
+  next: hyperHTML.wire()
 };
 
 module.exports = {
   main: (model) => wire.main`${model}`,
 
   item: (model) => view.item(
-    viperHTML.wire(model),
+    hyperHTML.wire(model),
     model
   ),
   comment: (model) => view.comment(
-    viperHTML.wire(model),
+    hyperHTML.wire(model),
     model
   ),
 
@@ -32,7 +32,7 @@ module.exports = {
     model
   ),
   summary: (model) => view.summary(
-    viperHTML.wire(model),
+    hyperHTML.wire(model),
     model
   ),
 
