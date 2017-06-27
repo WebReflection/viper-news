@@ -4,13 +4,19 @@ function _taggedTemplateLiteral(strings, raw) { return Object.freeze(Object.defi
 
 var hyperHTML = require('hyperhtml');
 
+var asyncRender = function asyncRender(pageName) {
+  return function (wire, model) {
+    return import('../../shared/view/' + pageName + '.js').then(function (renderFn) {
+      return renderFn(wire, model);
+    });
+  };
+};
+
 var view = {
   about: function about(wire, model) {
-    return import('../../shared/view/about').then(function (render) {
-      return render(wire, model);
-    });
+    return asyncRender('about')(wire, model);
   },
-  summary: import('../../shared/view/summary'),
+  summary: require('../../shared/view/summary'),
   item: require('../../shared/view/item'),
   comment: require('../../shared/view/comment'),
   user: require('../../shared/view/user'),
