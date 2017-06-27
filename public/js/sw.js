@@ -12,7 +12,7 @@ var any = function any($) {
 
 self.addEventListener('install', function (e) {
   e.waitUntil(openCache.then(function (cache) {
-    return cache.addAll(['/js/bundle.js', '/js/bundle.0.js', '/js/bundle.1.js', '/js/bundle.2.js', '/top/1']);
+    return cache.addAll(['/js/bundle.js', '/js/bundle.0.js', '/top/1']);
   }));
 });
 

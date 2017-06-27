@@ -1,13 +1,12 @@
 const hyperHTML = require('hyperhtml');
 
-const asyncRender = (pageName) => 
-  (wire, model) => 
-    import(`../../shared/view/${pageName}.js`)
-      .then(renderFn => renderFn(wire, model))
+const asyncRender = (pagePromise) => (wire, model) => 
+  pagePromise.then(renderFn => renderFn(wire, model))
 
+const aboutPagePromise = import("../../shared/view/about");
 
 const view = {
-  about: (wire, model) => asyncRender('about')(wire, model),
+  about: (wire, model) => asyncRender(aboutPagePromise)(wire, model),
   summary: require('../../shared/view/summary'),
   item: require('../../shared/view/item'),
   comment: require('../../shared/view/comment'),

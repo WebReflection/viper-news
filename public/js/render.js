@@ -4,17 +4,19 @@ function _taggedTemplateLiteral(strings, raw) { return Object.freeze(Object.defi
 
 var hyperHTML = require('hyperhtml');
 
-var asyncRender = function asyncRender(pageName) {
+var asyncRender = function asyncRender(pagePromise) {
   return function (wire, model) {
-    return import('../../shared/view/' + pageName + '.js').then(function (renderFn) {
+    return pagePromise.then(function (renderFn) {
       return renderFn(wire, model);
     });
   };
 };
 
+var aboutPagePromise = import("../../shared/view/about");
+
 var view = {
   about: function about(wire, model) {
-    return asyncRender('about')(wire, model);
+    return asyncRender(aboutPagePromise)(wire, model);
   },
   summary: require('../../shared/view/summary'),
   item: require('../../shared/view/item'),
