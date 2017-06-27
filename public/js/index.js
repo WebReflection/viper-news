@@ -1,5 +1,3 @@
-'use strict';
-
 var title = 'viperHTML 🐍 Hacker News';
 var render = require('./render');
 

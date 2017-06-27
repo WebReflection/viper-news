@@ -1,8 +1,8 @@
 const hyperHTML = require('hyperhtml');
 
 const view = {
-  about: require('../../shared/view/about'),
-  summary: require('../../shared/view/summary'),
+  about: (wire, model) => import('../../shared/view/about').then(render => render(wire, model)),
+  summary: import('../../shared/view/summary'),
   item: require('../../shared/view/item'),
   comment: require('../../shared/view/comment'),
   user: require('../../shared/view/user'),

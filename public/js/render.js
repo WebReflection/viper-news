@@ -1,5 +1,3 @@
-'use strict';
-
 var _templateObject = _taggedTemplateLiteral(['', ''], ['', '']);
 
 function _taggedTemplateLiteral(strings, raw) { return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
@@ -7,8 +5,12 @@ function _taggedTemplateLiteral(strings, raw) { return Object.freeze(Object.defi
 var hyperHTML = require('hyperhtml');
 
 var view = {
-  about: require('../../shared/view/about'),
-  summary: require('../../shared/view/summary'),
+  about: function about(wire, model) {
+    return import('../../shared/view/about').then(function (render) {
+      return render(wire, model);
+    });
+  },
+  summary: import('../../shared/view/summary'),
   item: require('../../shared/view/item'),
   comment: require('../../shared/view/comment'),
   user: require('../../shared/view/user'),

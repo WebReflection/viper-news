@@ -1,5 +1,3 @@
-'use strict';
-
 var openCache = caches.open('#[viper-news]');
 var any = function any($) {
   return new Promise(function (D, E, A, L) {

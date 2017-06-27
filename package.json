@@ -4,11 +4,10 @@
   "description": "viperHTML 🐍 does Hacker News",
   "main": "./server/js/index.js",
   "scripts": {
-    "babel": "babel ./client/js --out-dir ./public/js --presets=es2015",
-    "build": "npm run generate-views && npm run generate-css && npm run bundle && npm run babel && npm run minify && npm run sw",
-    "bundle": "browserify ./client/js/index.js -o ./client/js/bundle.max.js",
+    "babel": "babel ./client/js --out-dir ./public/js",
+    "build": "npm run generate-views && npm run generate-css && npm run bundle && npm run babel && npm run sw",
+    "bundle": "webpack --verbose",
     "deploy": "npm run build && echo 'Y' | gcloud app deploy",
-    "minify": "uglifyjs -mc warnings=false ./public/js/bundle.max.js -o ./public/js/bundle.js && rm ./client/js/bundle.max.js",
     "generate-css": "bash ./bash/generate-css",
     "generate-views": "bash ./bash/generate-views",
     "start": "node ./server/js/index.js",
@@ -31,10 +30,15 @@
   },
   "devDependencies": {
     "babel-cli": "^6.24.0",
+    "babel-loader": "^7.1.0",
+    "babel-plugin-syntax-dynamic-import": "^6.18.0",
+    "babel-preset-env": "^1.5.2",
     "babel-preset-es2015": "^6.24.0",
     "browserify": "^14.1.0",
     "csso-cli": "^1.0.0",
-    "uglify-js": "^2.8.21"
+    "uglify-js": "^2.8.21",
+    "webpack": "^3.0.0",
+    "webpack-bundle-analyzer": "^2.8.2"
   },
   "now": {
     "alias": "viper-news.now.sh",
