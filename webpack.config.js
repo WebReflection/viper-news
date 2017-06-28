@@ -1,5 +1,6 @@
+const {join} = require('path');
+
 const webpack = require('webpack');
-const {join, resolve} = require('path');
 
 module.exports = (env) => ({
     entry: {
