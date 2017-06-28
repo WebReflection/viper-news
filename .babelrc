@@ -1,0 +1,13 @@
+{
+    "presets": [
+        [
+            "env", 
+            {
+                "modules": false,
+                "browsers": "last 3 versions",
+                "uglify": true
+            }
+        ]
+    ],
+    "plugins": ["syntax-dynamic-import"]
+}

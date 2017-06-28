@@ -11,6 +11,14 @@ self.addEventListener('install', e => {
   e.waitUntil(
     openCache.then(cache => cache.addAll([
       '/js/bundle.js',
+      '/js/bundle.0.js',
+      '/js/bundle.1.js',
+      '/js/bundle.2.js',
+      '/js/bundle.3.js',
+      '/js/bundle.4.js',
+      '/js/bundle.5.js',
+      '/js/bundle.6.js',
+      '/js/bundle.7.js',
       '/top/1'
     ]))
   );

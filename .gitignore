@@ -1,3 +1,5 @@
 node_modules/*
 dist/*
 es2015/*
+
+.DS_Store

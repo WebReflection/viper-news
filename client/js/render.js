@@ -1,12 +1,15 @@
 const hyperHTML = require('hyperhtml');
 
+const asyncRenderView = (viewName, wire, model) =>
+  import(`../../shared/view/${viewName}.js`).then(renderFn => renderFn(wire, model));
+
 const view = {
-  about: require('../../shared/view/about'),
-  summary: require('../../shared/view/summary'),
-  item: require('../../shared/view/item'),
-  comment: require('../../shared/view/comment'),
-  user: require('../../shared/view/user'),
-  next: require('../../shared/view/next')
+  about: (wire, model) => asyncRenderView('about', wire, model),
+  summary: (wire, model) => asyncRenderView('summary', wire, model),
+  item: (wire, model) => asyncRenderView('item', wire, model),
+  comment: (wire, model) => asyncRenderView('comment', wire, model),
+  user: (wire, model) => asyncRenderView('user', wire, model),
+  next: (wire, model) => asyncRenderView('next', wire, model)
 };
 
 const wire = {
