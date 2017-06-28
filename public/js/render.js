@@ -1,33 +1,33 @@
-var _templateObject = _taggedTemplateLiteral(["", ""], ["", ""]);
+var _templateObject = _taggedTemplateLiteral(['', ''], ['', '']);
 
 function _taggedTemplateLiteral(strings, raw) { return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
 var hyperHTML = require('hyperhtml');
 
 var asyncRenderView = function asyncRenderView(viewName, wire, model) {
-  return import("../../shared/view/" + viewName + ".js").then(function (renderFn) {
+  return import('../../shared/view/' + viewName + '.js').then(function (renderFn) {
     return renderFn(wire, model);
   });
 };
 
 var view = {
   about: function about(wire, model) {
-    return asyncRenderView("about", wire, model);
+    return asyncRenderView('about', wire, model);
   },
   summary: function summary(wire, model) {
-    return asyncRenderView("summary", wire, model);
+    return asyncRenderView('summary', wire, model);
   },
   item: function item(wire, model) {
-    return asyncRenderView("item", wire, model);
+    return asyncRenderView('item', wire, model);
   },
   comment: function comment(wire, model) {
-    return asyncRenderView("comment", wire, model);
+    return asyncRenderView('comment', wire, model);
   },
   user: function user(wire, model) {
-    return asyncRenderView("user", wire, model);
+    return asyncRenderView('user', wire, model);
   },
   next: function next(wire, model) {
-    return asyncRenderView("next", wire, model);
+    return asyncRenderView('next', wire, model);
   }
 };
 
@@ -60,7 +60,7 @@ module.exports = {
   // here showing off other patterns/potentials
   header: function header(story) {
     return [].forEach.call(document.querySelectorAll('header a'), function (a) {
-      a.classList[~a.getAttribute('href').indexOf("/" + story) ? 'add' : 'remove']('selected');
+      a.classList[~a.getAttribute('href').indexOf('/' + story) ? 'add' : 'remove']('selected');
     });
   },
   user: function user(model) {

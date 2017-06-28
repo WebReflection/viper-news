@@ -3,7 +3,9 @@ const render = require('./render');
 
 // basically this is the router
 const showPage = () => {
-  const main = document.querySelector('main');
+
+  main = main || document.querySelector('main');
+  if (!main) return; // body not fully loaded yet ?
 
   // asking for users
   if (/^\/user\/([^?#]+)/.test(location.pathname)) {
@@ -16,9 +18,7 @@ const showPage = () => {
       // avoid races with latest clicked section
       if (id === lastClick) {
         document.title = `Profile: ${user.id} | ${title}`;
-        render.main(render.user(user));
-        scrollTo(0, 0);
-        main.classList.remove('opaque');
+        render.main(render.user(user).then(fadeIn));
       }
     });
   }
@@ -36,9 +36,7 @@ const showPage = () => {
         data.comments = data.comments
           .filter(filterComment)
           .map(mapComment);
-        render.main(render.item(data));
-        scrollTo(0, 0);
-        main.classList.remove('opaque');
+        render.main(render.item(data).then(fadeIn));
       }
     });
   }
@@ -52,9 +50,7 @@ const showPage = () => {
       case 'about':
         setTimeout(() => {
           if (story === lastClick) {
-            render.about([]);
-            scrollTo(0, 0);
-            main.classList.remove('opaque');
+            render.about([]).then(fadeIn);
           }
         }, 300);
         break;
@@ -66,11 +62,11 @@ const showPage = () => {
           if (story === lastClick) {
             document.title = title;
             render.main(
-              data.items.map(render.summary)
+              Promise.all(
+                data.items.map(render.summary)
                 .concat(data.next ? render.next(data) : [])
+              ).then(fadeIn)
             );
-            scrollTo(0, 0);
-            main.classList.remove('opaque');
           }
         });
         break;
@@ -81,6 +77,16 @@ const showPage = () => {
 // router helpers
 let lastClick;
 
+// main container
+let main;
+
+const fadeIn = (value) => {
+  scrollTo(0, 0);
+  main.classList.remove('opaque');
+  return value;
+};
+
+// layout filtering
 const filterComment = comment => !comment.deleted;
 
 const mapComment = comment => {
@@ -98,3 +104,9 @@ const mapComment = comment => {
 require('onpushstate');
 addEventListener('pushstate', showPage);
 addEventListener('popstate', showPage);
+
+
+// ServiceWorker
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('/sw.js');
+}

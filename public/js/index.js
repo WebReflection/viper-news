@@ -3,7 +3,9 @@ var render = require('./render');
 
 // basically this is the router
 var showPage = function showPage() {
-  var main = document.querySelector('main');
+
+  main = main || document.querySelector('main');
+  if (!main) return; // body not fully loaded yet ?
 
   // asking for users
   if (/^\/user\/([^?#]+)/.test(location.pathname)) {
@@ -16,9 +18,7 @@ var showPage = function showPage() {
       // avoid races with latest clicked section
       if (id === lastClick) {
         document.title = 'Profile: ' + user.id + ' | ' + title;
-        render.main(render.user(user));
-        scrollTo(0, 0);
-        main.classList.remove('opaque');
+        render.main(render.user(user).then(fadeIn));
       }
     });
   }
@@ -34,9 +34,7 @@ var showPage = function showPage() {
         if (_id === lastClick) {
           document.title = data.title;
           data.comments = data.comments.filter(filterComment).map(mapComment);
-          render.main(render.item(data));
-          scrollTo(0, 0);
-          main.classList.remove('opaque');
+          render.main(render.item(data).then(fadeIn));
         }
       });
     }
@@ -50,9 +48,7 @@ var showPage = function showPage() {
           case 'about':
             setTimeout(function () {
               if (story === lastClick) {
-                render.about([]);
-                scrollTo(0, 0);
-                main.classList.remove('opaque');
+                render.about([]).then(fadeIn);
               }
             }, 300);
             break;
@@ -63,9 +59,7 @@ var showPage = function showPage() {
               // avoid races with latest clicked section
               if (story === lastClick) {
                 document.title = title;
-                render.main(data.items.map(render.summary).concat(data.next ? render.next(data) : []));
-                scrollTo(0, 0);
-                main.classList.remove('opaque');
+                render.main(Promise.all(data.items.map(render.summary).concat(data.next ? render.next(data) : [])).then(fadeIn));
               }
             });
             break;
@@ -76,6 +70,16 @@ var showPage = function showPage() {
 // router helpers
 var lastClick = void 0;
 
+// main container
+var main = void 0;
+
+var fadeIn = function fadeIn(value) {
+  scrollTo(0, 0);
+  main.classList.remove('opaque');
+  return value;
+};
+
+// layout filtering
 var filterComment = function filterComment(comment) {
   return !comment.deleted;
 };
@@ -91,3 +95,8 @@ var mapComment = function mapComment(comment) {
 require('onpushstate');
 addEventListener('pushstate', showPage);
 addEventListener('popstate', showPage);
+
+// ServiceWorker
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('/sw.js');
+}
