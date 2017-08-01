@@ -5,13 +5,13 @@
   "main": "./server/js/index.js",
   "scripts": {
     "babel": "babel ./client/js --out-dir ./public/js",
-    "build": "npm run generate-views && npm run generate-css && npm run bundle && npm run babel && npm run sw",
+    "build": "npm run generate-views && npm run generate-css && webpack && npm run babel && npm run sw",
     "bundle": "webpack --verbose",
     "deploy": "npm run build && echo 'Y' | gcloud app deploy",
     "generate-css": "bash ./bash/generate-css",
     "generate-views": "bash ./bash/generate-views",
     "start": "node ./server/js/index.js",
-    "sw": "uglifyjs -mc warnings=false ./public/js/sw.js -o ./public/sw.js"
+    "sw": "uglifyjs -mc warnings=false ./client/js/sw.js -o ./public/sw.js"
   },
   "engines": {
     "node": ">=6.9"
@@ -23,10 +23,10 @@
     "compression": "^1.6.2",
     "express": "^4.15.2",
     "firebase": "^3.7.4",
-    "hyperhtml": "^0.15.1",
+    "hyperhtml": "^0.17.4",
+    "hyperhtml-app": "^0.2.0",
     "lru-cache": "^4.0.2",
-    "onpushstate": "^0.1.0",
-    "viperhtml": "^0.9.1"
+    "viperhtml": "^0.12.2"
   },
   "devDependencies": {
     "babel-cli": "^6.24.0",
@@ -35,7 +35,7 @@
     "babel-preset-env": "^1.5.2",
     "babel-preset-es2015": "^6.24.0",
     "csso-cli": "^1.0.0",
-    "uglify-js": "^2.8.21",
+    "uglify-es": "^3.0.27",
     "webpack": "^3.0.0",
     "webpack-bundle-analyzer": "^2.8.2"
   },
@@ -48,5 +48,22 @@
       "server",
       "shared"
     ]
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/WebReflection/viper-news.git"
+  },
+  "keywords": [
+    "hnpwa",
+    "hacker",
+    "news",
+    "PWA",
+    "viperhtml",
+    "hyperhtml",
+    "hyperhtml-app"
+  ],
+  "bugs": {
+    "url": "https://github.com/WebReflection/viper-news/issues"
+  },
+  "homepage": "https://github.com/WebReflection/viper-news#readme"
 }

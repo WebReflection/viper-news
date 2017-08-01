@@ -45,6 +45,7 @@ module.exports = {
   item: function item(model) {
     return view.item(hyperHTML.wire(model), model);
   },
+
   comment: function comment(model) {
     return view.comment(hyperHTML.wire(model), model);
   },
@@ -52,6 +53,7 @@ module.exports = {
   about: function about(model) {
     return view.about(wire.main, model);
   },
+
   summary: function summary(model) {
     return view.summary(hyperHTML.wire(model), model);
   },
@@ -63,9 +65,11 @@ module.exports = {
       a.classList[~a.getAttribute('href').indexOf('/' + story) ? 'add' : 'remove']('selected');
     });
   },
+
   user: function user(model) {
     return view.user(wire.user, model);
   },
+
   next: function next(model) {
     return view.next(wire.next, model);
   }

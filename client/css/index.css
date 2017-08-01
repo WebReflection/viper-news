@@ -16,7 +16,7 @@ body {
 }
 
 .opaque {
-  opacity: .1;
+  opacity: .7;
   pointer-events: none;
 }
 
@@ -27,7 +27,7 @@ main {
   padding: 2em;
   margin: 0 auto;
   box-sizing: border-box;
-  transition: opacity .3s ease-in;
+  /* transition: opacity .3s ease-in; */
 }
 
 main h1, h2, h3, h4, h5, h6 {

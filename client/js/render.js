@@ -25,6 +25,7 @@ module.exports = {
     hyperHTML.wire(model),
     model
   ),
+
   comment: (model) => view.comment(
     hyperHTML.wire(model),
     model
@@ -34,6 +35,7 @@ module.exports = {
     wire.main,
     model
   ),
+
   summary: (model) => view.summary(
     hyperHTML.wire(model),
     model
@@ -51,10 +53,12 @@ module.exports = {
       ]('selected');
     }
   ),
+
   user: (model) => view.user(
     wire.user,
     model
   ),
+
   next: (model) => view.next(
     wire.next,
     model

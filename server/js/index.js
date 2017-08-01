@@ -13,14 +13,16 @@ app.use(function (req, res, next) {
     res.redirect('https://' + req.headers.host + req.url);
 });
 app.use(compression({threshold: 0}));
-app.use(express.static(path.join(__dirname, '..', '..', 'public')));
+app.use(
+  express.static(
+    path.join(__dirname, '..', '..', 'public'),
+    {maxAge: '30 days'}
+  )
+);
 
 
 const title = 'viperHTML 🐍 Hacker News';
 const PAGE_SIZE = 20;
-const assets = {
-  style: fs.readFileSync(path.join(__dirname, '..', '..', 'public', 'css', 'bundle.css'))
-};
 
 const shared = new Proxy(
   new String(path.join(__dirname, '..', '..', 'shared', 'js')),
@@ -83,11 +85,10 @@ app.get('/user/:id', (req, res) => {
     chunk => res.write(chunk),
     {
       title: `Profile: ${user.id} | ${title}`,
-      header: render.header({
-        style: assets.style,
+      header: render.header(withStyle({
         story: 'user',
         stories: hn.stories
-      }),
+      })),
       main: render.user(addTimeAgo(user))
     }
   )).then(() => res.end());
@@ -130,11 +131,10 @@ app.get('/item/:id', (req, res) => {
     chunk => res.write(chunk),
     {
       title: item.title,
-      header: render.header({
-        style: assets.style,
+      header: render.header(withStyle({
         story: 'item',
         stories: hn.stories
-      }),
+      })),
       main: render.item(augmentComment(item))
     }
   )).then(() => res.end());
@@ -156,11 +156,7 @@ app.get('/about', (req, res) => {
     chunk => res.write(chunk),
     Object.assign(
       {
-        header: render.header(
-          Object.assign(info, {
-            style: assets.style
-          })
-        ),
+        header: render.header(withStyle(info)),
         main: render.about(info)
       },
       info
@@ -169,7 +165,8 @@ app.get('/about', (req, res) => {
 
 });
 
-
+const style = fs.readFileSync(path.join(__dirname, '..', '..', 'public', 'css', 'bundle.css'));
+const withStyle = info => Object.assign(info, {style: style});
 
 // server
 const PORT = process.env.PORT || 3000;
@@ -229,11 +226,7 @@ function serve(res, info) {
     chunk => res.write(chunk),
     Object.assign(
       {
-        header: render.header(
-          Object.assign(info, {
-            style: assets.style
-          })
-        ),
+        header: render.header(withStyle(info)),
         main: items.slice(start, end).map((item, i) =>
           hn.item(item)
             .then(item =>

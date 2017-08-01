@@ -8,13 +8,13 @@ module.exports = (render, model) => render`
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="theme-color" content="#ffffff">
-    <style>${model.style}</style>
-    <script async src="/js/bundle.js"></script>
     <link rel="manifest" href="/manifest.json">
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
     <link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
     <link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
     <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+    <script async src="/js/bundle.js"></script>
+    <style>${model.style}</style>
   </head>
   <body>
     <header>${model.header}</header>
