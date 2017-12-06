@@ -83,14 +83,14 @@ app.get('/user/:id', (req, res) => {
   res.writeHead(200, {'Content-Type': 'text/html'});
   hn.user(req.params.id).then(user => render.page(
     chunk => res.write(chunk),
-    {
+    withStyle({
       title: `Profile: ${user.id} | ${title}`,
-      header: render.header(withStyle({
+      header: render.header({
         story: 'user',
         stories: hn.stories
-      })),
+      }),
       main: render.user(addTimeAgo(user))
-    }
+    })
   )).then(() => res.end());
 });
 
@@ -129,14 +129,14 @@ app.get('/item/:id', (req, res) => {
   res.writeHead(200, {'Content-Type': 'text/html'});
   hn.item(req.params.id).then(item => render.page(
     chunk => res.write(chunk),
-    {
+    withStyle({
       title: item.title,
-      header: render.header(withStyle({
+      header: render.header({
         story: 'item',
         stories: hn.stories
-      })),
+      }),
       main: render.item(augmentComment(item))
-    }
+    })
   )).then(() => res.end());
 });
 
@@ -155,10 +155,10 @@ app.get('/about', (req, res) => {
   render.page(
     chunk => res.write(chunk),
     Object.assign(
-      {
-        header: render.header(withStyle(info)),
+      withStyle({
+        header: render.header(info),
         main: render.about(info)
-      },
+      }),
       info
     )
   ).then(() => res.end());
@@ -225,8 +225,8 @@ function serve(res, info) {
   hn.story(info.story).then(items => render.page(
     chunk => res.write(chunk),
     Object.assign(
-      {
-        header: render.header(withStyle(info)),
+      withStyle({
+        header: render.header(info),
         main: items.slice(start, end).map((item, i) =>
           hn.item(item)
             .then(item =>
@@ -238,7 +238,7 @@ function serve(res, info) {
           end < items.length ?
             render.next({next: `/${info.story}/${info.page + 1}`}) : []
         )
-      },
+      }),
       info
     )
   )).then(() => res.end());

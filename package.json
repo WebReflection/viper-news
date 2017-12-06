@@ -26,7 +26,7 @@
     "hyperhtml": "^0.17.4",
     "hyperhtml-app": "^0.2.0",
     "lru-cache": "^4.0.2",
-    "viperhtml": "^0.12.2"
+    "viperhtml": "^2.7.0"
   },
   "devDependencies": {
     "babel-cli": "^6.24.0",
