@@ -23,7 +23,7 @@
     "compression": "^1.6.2",
     "express": "^4.15.2",
     "firebase": "^3.7.4",
-    "hyperhtml": "^0.17.4",
+    "hyperhtml": "^2.4.3",
     "hyperhtml-app": "^0.2.0",
     "lru-cache": "^4.0.2",
     "viperhtml": "^2.7.0"
@@ -36,8 +36,8 @@
     "babel-preset-es2015": "^6.24.0",
     "csso-cli": "^1.0.0",
     "uglify-es": "^3.0.27",
-    "webpack": "^3.0.0",
-    "webpack-bundle-analyzer": "^2.8.2"
+    "webpack": "^3.10.0",
+    "webpack-bundle-analyzer": "^2.9.2"
   },
   "now": {
     "alias": "viper-news.now.sh",
