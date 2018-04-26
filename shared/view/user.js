@@ -7,5 +7,5 @@ module.exports = (render, model) => render`
   <a href="${'https://news.ycombinator.com/favorites?id=' + model.id}"> favourites </a>
 </p>
 <div class="${'about' + (model.about ? '' : ' hidden')}">
-  <p>${model.about || ''}</p>
+  <p>${[model.about || '']}</p>
 </div>`;
