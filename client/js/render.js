@@ -1,7 +1,7 @@
 const hyperHTML = require('hyperhtml/cjs');
 
 const asyncRenderView = (viewName, wire, model) =>
-  import(`../../shared/view/${viewName}.js`).then(renderFn => renderFn(wire, model));
+  import(`../../shared/view/${viewName}.js`).then(({default: renderFn}) => renderFn(wire, model));
 
 const view = {
   about: (wire, model) => asyncRenderView('about', wire, model),

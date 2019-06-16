@@ -5,8 +5,8 @@ const LRU = require( 'lru-cache' );
 
 // caches and stories
 const MAX_AGE = 1000 * 30;
-const items = LRU(100);
-const users = LRU(100);
+const items = new LRU(100);
+const users = new LRU(100);
 const stories = [
   'top',
   'new',

@@ -5,7 +5,8 @@ function _taggedTemplateLiteral(strings, raw) { return Object.freeze(Object.defi
 var hyperHTML = require('hyperhtml/cjs');
 
 var asyncRenderView = function asyncRenderView(viewName, wire, model) {
-  return import('../../shared/view/' + viewName + '.js').then(function (renderFn) {
+  return import('../../shared/view/' + viewName + '.js').then(function (_ref) {
+    var renderFn = _ref.default;
     return renderFn(wire, model);
   });
 };

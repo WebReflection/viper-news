@@ -20,8 +20,11 @@ module.exports = (env) => ({
             }
         ]
     },
+    mode: 'production',
+    optimization: {
+        minimize: true
+    },
     plugins: [
-        new webpack.optimize.ModuleConcatenationPlugin(),
-        new webpack.optimize.UglifyJsPlugin({warnings: false})
+        new webpack.optimize.ModuleConcatenationPlugin()
     ]
 });
